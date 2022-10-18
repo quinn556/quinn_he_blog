@@ -4,6 +4,7 @@ project:
 website:
   title: "Quinn He Blog"
   navbar:
+    background: "#881c1c"
     right:
       - text: "About Me"
       - file: about.qmd
