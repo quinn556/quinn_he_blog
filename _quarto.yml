@@ -10,7 +10,7 @@ website:
       - file: about.qmd
       - icon: github
         href: https://github.com/quinn556
-      - icon: linkedin
+      - text: linkedin
         href: https://www.linkedin.com/in/quinnhe/
 format:
   html:
