@@ -1,5 +1,5 @@
 ---
-title: "Welcome To My Blog"
+title: "Quinn He"
 author: "Quinn He"
 date: "2022-10-15"
 categories: [news]
@@ -10,3 +10,9 @@ This is the first post in a Quarto blog. Welcome!
 
 
 Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+
+
+
+## Notes
+
+Include previous blog posts and other homeworks from my other classes. I can include the 601 final as well

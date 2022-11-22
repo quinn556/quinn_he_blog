@@ -6,7 +6,6 @@ website:
   navbar:
     background: "#881c1c"
     right:
-      - text: "About Me"
       - file: about.qmd
       - icon: github
         href: https://github.com/quinn556
