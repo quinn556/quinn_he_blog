@@ -14,23 +14,16 @@
     "text": "1a"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "title": "Quinn He",
     "section": "",
     "text": "This is the first post in a Quarto blog. Welcome!\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
     "objectID": "posts/welcome/index.html#notes",
     "href": "posts/welcome/index.html#notes",
-    "title": "Welcome To My Blog",
+    "title": "Quinn He",
     "section": "Notes",
     "text": "Notes\nInclude previous blog posts and other homeworks from my other classes. I can include the 601 final as well"
   },
@@ -46,13 +39,13 @@
     "href": "index.html",
     "title": "quinn_he_blog",
     "section": "",
-    "text": "hw1\n\n\n\n\n\n\n\n\n\n\n\nNov 3, 2022\n\n\nQuinn He\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nOct 18, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nOct 15, 2022\n\n\nQuinn He\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nJan 9, 2022\n\n\nQuinn He\n\n\n\n\n\n\nNo matching items"
+    "text": "hw1\n\n\n\n\n\n\n\n\n\n\n\nNov 3, 2022\n\n\nQuinn He\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nOct 15, 2022\n\n\nQuinn He\n\n\n\n\n\n\n\n\n\n\n\n\nThis is a final project I completed for Intro to Data Science.\n\n\n\n\n\n\nJan 9, 2022\n\n\nQuinn He\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "I am a graduate student in the Data Analytics and Computational Social Science M.S. program at the University of Massachusetts Amherst. My research interests include studying the flow of misinformation on social media, data visualization, and digital behavioral data. I earned my B.A. in English with a certificate in the Study and Practice of Writing, as well as a minor in Psychology from UMass Amherst. My plan for a career is to combine what I've learned in these two unique disciplines and act as a communicator of data for companies."
   }
 ]
