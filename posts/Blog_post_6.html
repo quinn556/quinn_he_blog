@@ -3669,33 +3669,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-43"><a href="#cb69-43" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb69-44"><a href="#cb69-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-45"><a href="#cb69-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-46"><a href="#cb69-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-47"><a href="#cb69-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb69-48"><a href="#cb69-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-49"><a href="#cb69-49" aria-hidden="true" tabindex="-1"></a>Social media offers users a platform for political discourse and discussion with people from all over the world or country. Facebook, Reddit, and Twitter are the primary social media platforms that all for the most text based posts. I chose to study political discourse on Reddit because subreddits, which are basically forums dedicated to a particular topic that users can join or "subscribe" to. In a subreddit, users can post any type of media they would like and other users comment their thoughts. It is a relatively straightforwards forum style website, and it allows users to post long form comments. Like any social media platform, there are users with non-serious comments that are can sometimes derail conversation, but other times users will post their serious thoughts, which then sparks comment threads and discussion. This reason is why I chose to study Reddit over other text based social media apps because Reddit enables long form discourse on specific posts within a subreddit's topic. </span>
-<span id="cb69-50"><a href="#cb69-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-51"><a href="#cb69-51" aria-hidden="true" tabindex="-1"></a>As stated in previous research, Reddit is not a great representation of the general public. It is a niche group, but users can have more in depth discussion than on Twitter. </span>
-<span id="cb69-52"><a href="#cb69-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-53"><a href="#cb69-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
-<span id="cb69-54"><a href="#cb69-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-55"><a href="#cb69-55" aria-hidden="true" tabindex="-1"></a>The two data sets I am using were collected using the RedditExtractoR package. I collected comments from /r/democrats and /r/republicans and stored them each as their own data set. The /r/democrats subreddit spans one year 11/08/2021 to 11/08/2022 with 26,764 comments and /r/republican is from 11/10/2021 to 11/06/2022 with 2054 comments. There is a large discrepancy between the data collected because /r/democrats is significantly larger than /r/republicans with almost 200,000 compared to 17,600 respectively. Traditionally, Reddit is seen as a more liberal platform, but may suggest the low number of members in /r/republicans. </span>
-<span id="cb69-56"><a href="#cb69-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-57"><a href="#cb69-57" aria-hidden="true" tabindex="-1"></a>The variables in each dataset include url, author, date, timestamp, score, upvotes, downvotes, golds, comment, comment_id. For the purpose of this research, many of these variables are not important, and I will be focusing on the text of the comment variable.  </span>
-<span id="cb69-58"><a href="#cb69-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-59"><a href="#cb69-59" aria-hidden="true" tabindex="-1"></a>From here on wards, I refer to /r/democrats as "blue" and /r/republicans as "red" for ease of writing. </span>
-<span id="cb69-60"><a href="#cb69-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-63"><a href="#cb69-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-64"><a href="#cb69-64" aria-hidden="true" tabindex="-1"></a>blue_comments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"blue_commentsforfinal.csv"</span>)</span>
-<span id="cb69-65"><a href="#cb69-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-66"><a href="#cb69-66" aria-hidden="true" tabindex="-1"></a>red_comments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"red_commentsforfinal.csv"</span>)</span>
-<span id="cb69-67"><a href="#cb69-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-68"><a href="#cb69-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-69"><a href="#cb69-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-70"><a href="#cb69-70" aria-hidden="true" tabindex="-1"></a>#Methods</span>
-<span id="cb69-71"><a href="#cb69-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-72"><a href="#cb69-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pre-processing Subreddits</span></span>
-<span id="cb69-73"><a href="#cb69-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-74"><a href="#cb69-74" aria-hidden="true" tabindex="-1"></a>Every post on political subreddits have an "AutoModerator" post a general comment that reminds users to act civily in conversation. This is extremely unuseful and would skew my data tremendously since for every post, there is one of these comments. I also remove any comments that are <span class="sc">\[</span>deleted<span class="sc">\]</span> or <span class="sc">\[</span>removed<span class="sc">\]</span> as a user's comment could have been deleted or removed by a moderator. </span>
+<span id="cb69-46"><a href="#cb69-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb69-47"><a href="#cb69-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-48"><a href="#cb69-48" aria-hidden="true" tabindex="-1"></a>Social media offers users a platform for political discourse and discussion with people from all over the world or country. Facebook, Reddit, and Twitter are the primary social media platforms that all for the most text based posts. I chose to study political discourse on Reddit because subreddits, which are basically forums dedicated to a particular topic that users can join or "subscribe" to. In a subreddit, users can post any type of media they would like and other users comment their thoughts. It is a relatively straightforwards forum style website, and it allows users to post long form comments. Like any social media platform, there are users with non-serious comments that are can sometimes derail conversation, but other times users will post their serious thoughts, which then sparks comment threads and discussion. This reason is why I chose to study Reddit over other text based social media apps because Reddit enables long form discourse on specific posts within a subreddit's topic.</span>
+<span id="cb69-49"><a href="#cb69-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-50"><a href="#cb69-50" aria-hidden="true" tabindex="-1"></a>As stated in previous research, Reddit is not a great representation of the general public. It is a niche group, but users can have more in depth discussion than on Twitter.</span>
+<span id="cb69-51"><a href="#cb69-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-52"><a href="#cb69-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
+<span id="cb69-53"><a href="#cb69-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-54"><a href="#cb69-54" aria-hidden="true" tabindex="-1"></a>The two data sets I am using were collected using the RedditExtractoR package. I collected comments from /r/democrats and /r/republicans and stored them each as their own data set. The /r/democrats subreddit spans one year 11/08/2021 to 11/08/2022 with 26,764 comments and /r/republican is from 11/10/2021 to 11/06/2022 with 2054 comments. There is a large discrepancy between the data collected because /r/democrats is significantly larger than /r/republicans with almost 200,000 compared to 17,600 respectively. Traditionally, Reddit is seen as a more liberal platform, but may suggest the low number of members in /r/republicans.</span>
+<span id="cb69-55"><a href="#cb69-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-56"><a href="#cb69-56" aria-hidden="true" tabindex="-1"></a>The variables in each dataset include url, author, date, timestamp, score, upvotes, downvotes, golds, comment, comment_id. For the purpose of this research, many of these variables are not important, and I will be focusing on the text of the comment variable.</span>
+<span id="cb69-57"><a href="#cb69-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-58"><a href="#cb69-58" aria-hidden="true" tabindex="-1"></a>From here on wards, I refer to /r/democrats as "blue" and /r/republicans as "red" for ease of writing.</span>
+<span id="cb69-59"><a href="#cb69-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-62"><a href="#cb69-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-63"><a href="#cb69-63" aria-hidden="true" tabindex="-1"></a>blue_comments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"blue_commentsforfinal.csv"</span>)</span>
+<span id="cb69-64"><a href="#cb69-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-65"><a href="#cb69-65" aria-hidden="true" tabindex="-1"></a>red_comments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"red_commentsforfinal.csv"</span>)</span>
+<span id="cb69-66"><a href="#cb69-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-67"><a href="#cb69-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-68"><a href="#cb69-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-69"><a href="#cb69-69" aria-hidden="true" tabindex="-1"></a>#Methods</span>
+<span id="cb69-70"><a href="#cb69-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-71"><a href="#cb69-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pre-processing Subreddits</span></span>
+<span id="cb69-72"><a href="#cb69-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-73"><a href="#cb69-73" aria-hidden="true" tabindex="-1"></a>Every post on political subreddits have an "AutoModerator" post a general comment that reminds users to act civily in conversation. This is extremely unuseful and would skew my data tremendously since for every post, there is one of these comments. I also remove any comments that are <span class="sc">\[</span>deleted<span class="sc">\]</span> or <span class="sc">\[</span>removed<span class="sc">\]</span> as a user's comment could have been deleted or removed by a moderator.</span>
+<span id="cb69-74"><a href="#cb69-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-77"><a href="#cb69-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb69-78"><a href="#cb69-78" aria-hidden="true" tabindex="-1"></a>blue_comments <span class="ot">&lt;-</span> blue_comments<span class="sc">%&gt;%</span></span>
 <span id="cb69-79"><a href="#cb69-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(comment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"[removed]"</span>, <span class="st">"[deleted]"</span>))) <span class="sc">%&gt;%</span> </span>
@@ -3708,77 +3708,77 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-86"><a href="#cb69-86" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb69-87"><a href="#cb69-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-88"><a href="#cb69-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-89"><a href="#cb69-89" aria-hidden="true" tabindex="-1"></a>For each subreddit I must create a corpus, set of tokens, and a document feature matrix. I implement the standard preprocessing techniques by removing stopwords and other symbols, punctuation, numbers, etc. so only the necessary words for the analysis to measure political discourse. I chose not to stem the words because I did not see too much overlap of words with similar roots and I do not like using stemming for this type of analysis because I want to see the full word.  </span>
+<span id="cb69-89"><a href="#cb69-89" aria-hidden="true" tabindex="-1"></a>For each subreddit I must create a corpus, set of tokens, and a document feature matrix. I implement the standard preprocessing techniques by removing stopwords and other symbols, punctuation, numbers, etc. so only the necessary words for the analysis to measure political discourse. I chose not to stem the words because I did not see too much overlap of words with similar roots and I do not like using stemming for this type of analysis because I want to see the full word.</span>
 <span id="cb69-90"><a href="#cb69-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-91"><a href="#cb69-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### /r/democrats</span></span>
-<span id="cb69-94"><a href="#cb69-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-95"><a href="#cb69-95" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue_comments<span class="sc">$</span>comment)</span>
-<span id="cb69-96"><a href="#cb69-96" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(blue_corpus)</span>
-<span id="cb69-97"><a href="#cb69-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-98"><a href="#cb69-98" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
-<span id="cb69-99"><a href="#cb69-99" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
-<span id="cb69-100"><a href="#cb69-100" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
-<span id="cb69-101"><a href="#cb69-101" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
-<span id="cb69-102"><a href="#cb69-102" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
-<span id="cb69-103"><a href="#cb69-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-104"><a href="#cb69-104" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens, </span>
-<span id="cb69-105"><a href="#cb69-105" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>), </span>
-<span id="cb69-106"><a href="#cb69-106" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span> )</span>
-<span id="cb69-107"><a href="#cb69-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-108"><a href="#cb69-108" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
-<span id="cb69-109"><a href="#cb69-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-110"><a href="#cb69-110" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(blue_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>, <span class="st">"t"</span>, <span class="st">"can"</span>))</span>
-<span id="cb69-111"><a href="#cb69-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-112"><a href="#cb69-112" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(blue_tokens)</span>
-<span id="cb69-113"><a href="#cb69-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-114"><a href="#cb69-114" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating the Document Feature Matrix</span></span>
-<span id="cb69-115"><a href="#cb69-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-116"><a href="#cb69-116" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> blue_tokens <span class="sc">%&gt;%</span> </span>
-<span id="cb69-117"><a href="#cb69-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb69-118"><a href="#cb69-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() </span>
-<span id="cb69-119"><a href="#cb69-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-120"><a href="#cb69-120" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(blue_dfm, <span class="at">min_termfreq =</span> <span class="dv">5</span>)</span>
-<span id="cb69-121"><a href="#cb69-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-122"><a href="#cb69-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-92"><a href="#cb69-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-95"><a href="#cb69-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-96"><a href="#cb69-96" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue_comments<span class="sc">$</span>comment)</span>
+<span id="cb69-97"><a href="#cb69-97" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(blue_corpus)</span>
+<span id="cb69-98"><a href="#cb69-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-99"><a href="#cb69-99" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
+<span id="cb69-100"><a href="#cb69-100" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb69-101"><a href="#cb69-101" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
+<span id="cb69-102"><a href="#cb69-102" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
+<span id="cb69-103"><a href="#cb69-103" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb69-104"><a href="#cb69-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-105"><a href="#cb69-105" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens, </span>
+<span id="cb69-106"><a href="#cb69-106" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>), </span>
+<span id="cb69-107"><a href="#cb69-107" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span> )</span>
+<span id="cb69-108"><a href="#cb69-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-109"><a href="#cb69-109" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
+<span id="cb69-110"><a href="#cb69-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-111"><a href="#cb69-111" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(blue_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>, <span class="st">"t"</span>, <span class="st">"can"</span>))</span>
+<span id="cb69-112"><a href="#cb69-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-113"><a href="#cb69-113" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(blue_tokens)</span>
+<span id="cb69-114"><a href="#cb69-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-115"><a href="#cb69-115" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating the Document Feature Matrix</span></span>
+<span id="cb69-116"><a href="#cb69-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-117"><a href="#cb69-117" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> blue_tokens <span class="sc">%&gt;%</span> </span>
+<span id="cb69-118"><a href="#cb69-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb69-119"><a href="#cb69-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() </span>
+<span id="cb69-120"><a href="#cb69-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-121"><a href="#cb69-121" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(blue_dfm, <span class="at">min_termfreq =</span> <span class="dv">5</span>)</span>
+<span id="cb69-122"><a href="#cb69-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-123"><a href="#cb69-123" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-124"><a href="#cb69-124" aria-hidden="true" tabindex="-1"></a><span class="fu">### /r/republicans</span></span>
-<span id="cb69-127"><a href="#cb69-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-128"><a href="#cb69-128" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
-<span id="cb69-129"><a href="#cb69-129" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(red_corpus)</span>
-<span id="cb69-130"><a href="#cb69-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-131"><a href="#cb69-131" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
-<span id="cb69-132"><a href="#cb69-132" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
-<span id="cb69-133"><a href="#cb69-133" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
-<span id="cb69-134"><a href="#cb69-134" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
-<span id="cb69-135"><a href="#cb69-135" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
-<span id="cb69-136"><a href="#cb69-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-137"><a href="#cb69-137" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens, </span>
-<span id="cb69-138"><a href="#cb69-138" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>), </span>
-<span id="cb69-139"><a href="#cb69-139" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>, )</span>
-<span id="cb69-140"><a href="#cb69-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-141"><a href="#cb69-141" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
-<span id="cb69-142"><a href="#cb69-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-143"><a href="#cb69-143" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(red_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>, <span class="st">"t"</span>, <span class="st">"can"</span>))</span>
-<span id="cb69-144"><a href="#cb69-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-145"><a href="#cb69-145" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(red_tokens)</span>
-<span id="cb69-146"><a href="#cb69-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-147"><a href="#cb69-147" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating the Document Feature Matrix</span></span>
-<span id="cb69-148"><a href="#cb69-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-149"><a href="#cb69-149" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> red_tokens <span class="sc">%&gt;%</span> </span>
-<span id="cb69-150"><a href="#cb69-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb69-151"><a href="#cb69-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() </span>
-<span id="cb69-152"><a href="#cb69-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-153"><a href="#cb69-153" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(red_dfm, <span class="at">min_termfreq =</span> <span class="dv">5</span>)</span>
-<span id="cb69-154"><a href="#cb69-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-155"><a href="#cb69-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-156"><a href="#cb69-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sentiment Analysis: NRC Dictionary </span></span>
-<span id="cb69-157"><a href="#cb69-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-160"><a href="#cb69-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-161"><a href="#cb69-161" aria-hidden="true" tabindex="-1"></a>NRC_blue <span class="ot">&lt;-</span> <span class="fu">liwcalike</span>(blue_corpus, data_dictionary_NRC)</span>
-<span id="cb69-162"><a href="#cb69-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-163"><a href="#cb69-163" aria-hidden="true" tabindex="-1"></a>NRC_red <span class="ot">&lt;-</span> <span class="fu">liwcalike</span>(red_corpus, data_dictionary_NRC)</span>
-<span id="cb69-164"><a href="#cb69-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-165"><a href="#cb69-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-125"><a href="#cb69-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-128"><a href="#cb69-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-129"><a href="#cb69-129" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
+<span id="cb69-130"><a href="#cb69-130" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(red_corpus)</span>
+<span id="cb69-131"><a href="#cb69-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-132"><a href="#cb69-132" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
+<span id="cb69-133"><a href="#cb69-133" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb69-134"><a href="#cb69-134" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
+<span id="cb69-135"><a href="#cb69-135" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
+<span id="cb69-136"><a href="#cb69-136" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb69-137"><a href="#cb69-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-138"><a href="#cb69-138" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens, </span>
+<span id="cb69-139"><a href="#cb69-139" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>), </span>
+<span id="cb69-140"><a href="#cb69-140" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>, )</span>
+<span id="cb69-141"><a href="#cb69-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-142"><a href="#cb69-142" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
+<span id="cb69-143"><a href="#cb69-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-144"><a href="#cb69-144" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(red_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>, <span class="st">"t"</span>, <span class="st">"can"</span>))</span>
+<span id="cb69-145"><a href="#cb69-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-146"><a href="#cb69-146" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(red_tokens)</span>
+<span id="cb69-147"><a href="#cb69-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-148"><a href="#cb69-148" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating the Document Feature Matrix</span></span>
+<span id="cb69-149"><a href="#cb69-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-150"><a href="#cb69-150" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> red_tokens <span class="sc">%&gt;%</span> </span>
+<span id="cb69-151"><a href="#cb69-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb69-152"><a href="#cb69-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>() </span>
+<span id="cb69-153"><a href="#cb69-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-154"><a href="#cb69-154" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(red_dfm, <span class="at">min_termfreq =</span> <span class="dv">5</span>)</span>
+<span id="cb69-155"><a href="#cb69-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-156"><a href="#cb69-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-157"><a href="#cb69-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sentiment Analysis: NRC Dictionary</span></span>
+<span id="cb69-158"><a href="#cb69-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-161"><a href="#cb69-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-162"><a href="#cb69-162" aria-hidden="true" tabindex="-1"></a>NRC_blue <span class="ot">&lt;-</span> <span class="fu">liwcalike</span>(blue_corpus, data_dictionary_NRC)</span>
+<span id="cb69-163"><a href="#cb69-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-164"><a href="#cb69-164" aria-hidden="true" tabindex="-1"></a>NRC_red <span class="ot">&lt;-</span> <span class="fu">liwcalike</span>(red_corpus, data_dictionary_NRC)</span>
+<span id="cb69-165"><a href="#cb69-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-166"><a href="#cb69-166" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-167"><a href="#cb69-167" aria-hidden="true" tabindex="-1"></a><span class="fu">### Polarity Measure: Blue</span></span>
 <span id="cb69-168"><a href="#cb69-168" aria-hidden="true" tabindex="-1"></a></span>
@@ -3795,104 +3795,104 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-181"><a href="#cb69-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-182"><a href="#cb69-182" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-183"><a href="#cb69-183" aria-hidden="true" tabindex="-1"></a>Sentiment graph</span>
-<span id="cb69-186"><a href="#cb69-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-187"><a href="#cb69-187" aria-hidden="true" tabindex="-1"></a>blue_facet <span class="ot">&lt;-</span> blue_comments <span class="sc">%&gt;%</span></span>
-<span id="cb69-188"><a href="#cb69-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
-<span id="cb69-189"><a href="#cb69-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment)</span>
-<span id="cb69-190"><a href="#cb69-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-191"><a href="#cb69-191" aria-hidden="true" tabindex="-1"></a>sent_words_blue <span class="ot">&lt;-</span> blue_facet <span class="sc">%&gt;%</span></span>
-<span id="cb69-192"><a href="#cb69-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-193"><a href="#cb69-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-194"><a href="#cb69-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb69-195"><a href="#cb69-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-196"><a href="#cb69-196" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-197"><a href="#cb69-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-184"><a href="#cb69-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-187"><a href="#cb69-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-188"><a href="#cb69-188" aria-hidden="true" tabindex="-1"></a>blue_facet <span class="ot">&lt;-</span> blue_comments <span class="sc">%&gt;%</span></span>
+<span id="cb69-189"><a href="#cb69-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
+<span id="cb69-190"><a href="#cb69-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment)</span>
+<span id="cb69-191"><a href="#cb69-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-192"><a href="#cb69-192" aria-hidden="true" tabindex="-1"></a>sent_words_blue <span class="ot">&lt;-</span> blue_facet <span class="sc">%&gt;%</span></span>
+<span id="cb69-193"><a href="#cb69-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-194"><a href="#cb69-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-195"><a href="#cb69-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb69-196"><a href="#cb69-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-197"><a href="#cb69-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-198"><a href="#cb69-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-199"><a href="#cb69-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-202"><a href="#cb69-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-203"><a href="#cb69-203" aria-hidden="true" tabindex="-1"></a>sent_words_blue <span class="sc">%&gt;%</span></span>
-<span id="cb69-204"><a href="#cb69-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
-<span id="cb69-205"><a href="#cb69-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-206"><a href="#cb69-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb69-207"><a href="#cb69-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-208"><a href="#cb69-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb69-209"><a href="#cb69-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb69-210"><a href="#cb69-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb69-211"><a href="#cb69-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of terms in /r/democrats with NRC sentiment"</span>,</span>
-<span id="cb69-212"><a href="#cb69-212" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Contribution to sentiment"</span>,</span>
-<span id="cb69-213"><a href="#cb69-213" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb69-214"><a href="#cb69-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
-<span id="cb69-215"><a href="#cb69-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-216"><a href="#cb69-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-217"><a href="#cb69-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-201"><a href="#cb69-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-202"><a href="#cb69-202" aria-hidden="true" tabindex="-1"></a>sent_words_blue <span class="sc">%&gt;%</span></span>
+<span id="cb69-203"><a href="#cb69-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
+<span id="cb69-204"><a href="#cb69-204" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-205"><a href="#cb69-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb69-206"><a href="#cb69-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-207"><a href="#cb69-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb69-208"><a href="#cb69-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb69-209"><a href="#cb69-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb69-210"><a href="#cb69-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of terms in /r/democrats with NRC sentiment"</span>,</span>
+<span id="cb69-211"><a href="#cb69-211" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Contribution to sentiment"</span>,</span>
+<span id="cb69-212"><a href="#cb69-212" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb69-213"><a href="#cb69-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb69-214"><a href="#cb69-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-215"><a href="#cb69-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-216"><a href="#cb69-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-217"><a href="#cb69-217" aria-hidden="true" tabindex="-1"></a><span class="fu">### Polarity Measure: Red</span></span>
 <span id="cb69-218"><a href="#cb69-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-219"><a href="#cb69-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### Polarity Measure: Red</span></span>
-<span id="cb69-220"><a href="#cb69-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-223"><a href="#cb69-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-224"><a href="#cb69-224" aria-hidden="true" tabindex="-1"></a>NRC_red<span class="sc">$</span>polarity <span class="ot">&lt;-</span> NRC_red<span class="sc">$</span>positive <span class="sc">-</span> NRC_red<span class="sc">$</span>negative</span>
-<span id="cb69-225"><a href="#cb69-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-226"><a href="#cb69-226" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NRC_red)<span class="sc">+</span></span>
-<span id="cb69-227"><a href="#cb69-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(polarity))<span class="sc">+</span></span>
-<span id="cb69-228"><a href="#cb69-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb69-229"><a href="#cb69-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Polarity Measure in /r/republicans"</span>, <span class="at">x =</span> <span class="st">"Polarity"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
-<span id="cb69-230"><a href="#cb69-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-231"><a href="#cb69-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-234"><a href="#cb69-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-235"><a href="#cb69-235" aria-hidden="true" tabindex="-1"></a>red_facet <span class="ot">&lt;-</span> red_comments <span class="sc">%&gt;%</span></span>
-<span id="cb69-236"><a href="#cb69-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
-<span id="cb69-237"><a href="#cb69-237" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment)</span>
-<span id="cb69-238"><a href="#cb69-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-239"><a href="#cb69-239" aria-hidden="true" tabindex="-1"></a>word_counts_red <span class="ot">&lt;-</span> red_facet <span class="sc">%&gt;%</span></span>
-<span id="cb69-240"><a href="#cb69-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-241"><a href="#cb69-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-242"><a href="#cb69-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb69-243"><a href="#cb69-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-244"><a href="#cb69-244" aria-hidden="true" tabindex="-1"></a>word_counts_red <span class="sc">%&gt;%</span></span>
-<span id="cb69-245"><a href="#cb69-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
-<span id="cb69-246"><a href="#cb69-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-247"><a href="#cb69-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb69-248"><a href="#cb69-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-249"><a href="#cb69-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb69-250"><a href="#cb69-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb69-251"><a href="#cb69-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb69-252"><a href="#cb69-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of terms in /r/republicans with NRC sentiment"</span>,</span>
-<span id="cb69-253"><a href="#cb69-253" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Contribution to sentiment"</span>,</span>
-<span id="cb69-254"><a href="#cb69-254" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb69-255"><a href="#cb69-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb69-221"><a href="#cb69-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-222"><a href="#cb69-222" aria-hidden="true" tabindex="-1"></a>NRC_red<span class="sc">$</span>polarity <span class="ot">&lt;-</span> NRC_red<span class="sc">$</span>positive <span class="sc">-</span> NRC_red<span class="sc">$</span>negative</span>
+<span id="cb69-223"><a href="#cb69-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-224"><a href="#cb69-224" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NRC_red)<span class="sc">+</span></span>
+<span id="cb69-225"><a href="#cb69-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(polarity))<span class="sc">+</span></span>
+<span id="cb69-226"><a href="#cb69-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
+<span id="cb69-227"><a href="#cb69-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Polarity Measure in /r/republicans"</span>, <span class="at">x =</span> <span class="st">"Polarity"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span>
+<span id="cb69-228"><a href="#cb69-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-229"><a href="#cb69-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-232"><a href="#cb69-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-233"><a href="#cb69-233" aria-hidden="true" tabindex="-1"></a>red_facet <span class="ot">&lt;-</span> red_comments <span class="sc">%&gt;%</span></span>
+<span id="cb69-234"><a href="#cb69-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
+<span id="cb69-235"><a href="#cb69-235" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment)</span>
+<span id="cb69-236"><a href="#cb69-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-237"><a href="#cb69-237" aria-hidden="true" tabindex="-1"></a>word_counts_red <span class="ot">&lt;-</span> red_facet <span class="sc">%&gt;%</span></span>
+<span id="cb69-238"><a href="#cb69-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"nrc"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-239"><a href="#cb69-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-240"><a href="#cb69-240" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb69-241"><a href="#cb69-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-242"><a href="#cb69-242" aria-hidden="true" tabindex="-1"></a>word_counts_red <span class="sc">%&gt;%</span></span>
+<span id="cb69-243"><a href="#cb69-243" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
+<span id="cb69-244"><a href="#cb69-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-245"><a href="#cb69-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb69-246"><a href="#cb69-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-247"><a href="#cb69-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb69-248"><a href="#cb69-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb69-249"><a href="#cb69-249" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb69-250"><a href="#cb69-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of terms in /r/republicans with NRC sentiment"</span>,</span>
+<span id="cb69-251"><a href="#cb69-251" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Contribution to sentiment"</span>,</span>
+<span id="cb69-252"><a href="#cb69-252" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb69-253"><a href="#cb69-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb69-254"><a href="#cb69-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-255"><a href="#cb69-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-256"><a href="#cb69-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-257"><a href="#cb69-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-257"><a href="#cb69-257" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sentiment Analysis: Positive Negative Bing</span></span>
 <span id="cb69-258"><a href="#cb69-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-259"><a href="#cb69-259" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sentiment Analysis: Positive Negative Bing</span></span>
+<span id="cb69-259"><a href="#cb69-259" aria-hidden="true" tabindex="-1"></a>Republican</span>
 <span id="cb69-260"><a href="#cb69-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-261"><a href="#cb69-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-262"><a href="#cb69-262" aria-hidden="true" tabindex="-1"></a>Republican</span>
-<span id="cb69-265"><a href="#cb69-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-266"><a href="#cb69-266" aria-hidden="true" tabindex="-1"></a>red_facet2 <span class="ot">&lt;-</span> red_comments <span class="sc">%&gt;%</span></span>
-<span id="cb69-267"><a href="#cb69-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
-<span id="cb69-268"><a href="#cb69-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment)</span>
-<span id="cb69-269"><a href="#cb69-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-270"><a href="#cb69-270" aria-hidden="true" tabindex="-1"></a>word_counts_red2 <span class="ot">&lt;-</span> red_facet2 <span class="sc">%&gt;%</span></span>
-<span id="cb69-271"><a href="#cb69-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-272"><a href="#cb69-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-273"><a href="#cb69-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb69-274"><a href="#cb69-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-275"><a href="#cb69-275" aria-hidden="true" tabindex="-1"></a>word_counts_red2 <span class="sc">%&gt;%</span></span>
-<span id="cb69-276"><a href="#cb69-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
-<span id="cb69-277"><a href="#cb69-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb69-278"><a href="#cb69-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb69-279"><a href="#cb69-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
-<span id="cb69-280"><a href="#cb69-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb69-281"><a href="#cb69-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb69-282"><a href="#cb69-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
-<span id="cb69-283"><a href="#cb69-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of terms in /r/republicans with Bing sentiment"</span>,</span>
-<span id="cb69-284"><a href="#cb69-284" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Contribution to sentiment"</span>,</span>
-<span id="cb69-285"><a href="#cb69-285" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb69-286"><a href="#cb69-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb69-263"><a href="#cb69-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-264"><a href="#cb69-264" aria-hidden="true" tabindex="-1"></a>red_facet2 <span class="ot">&lt;-</span> red_comments <span class="sc">%&gt;%</span></span>
+<span id="cb69-265"><a href="#cb69-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
+<span id="cb69-266"><a href="#cb69-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, comment)</span>
+<span id="cb69-267"><a href="#cb69-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-268"><a href="#cb69-268" aria-hidden="true" tabindex="-1"></a>word_counts_red2 <span class="ot">&lt;-</span> red_facet2 <span class="sc">%&gt;%</span></span>
+<span id="cb69-269"><a href="#cb69-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-270"><a href="#cb69-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-271"><a href="#cb69-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb69-272"><a href="#cb69-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-273"><a href="#cb69-273" aria-hidden="true" tabindex="-1"></a>word_counts_red2 <span class="sc">%&gt;%</span></span>
+<span id="cb69-274"><a href="#cb69-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
+<span id="cb69-275"><a href="#cb69-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb69-276"><a href="#cb69-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb69-277"><a href="#cb69-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-278"><a href="#cb69-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb69-279"><a href="#cb69-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb69-280"><a href="#cb69-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sentiment, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb69-281"><a href="#cb69-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Contribution of terms in /r/republicans with Bing sentiment"</span>,</span>
+<span id="cb69-282"><a href="#cb69-282" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Contribution to sentiment"</span>,</span>
+<span id="cb69-283"><a href="#cb69-283" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb69-284"><a href="#cb69-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span>
+<span id="cb69-285"><a href="#cb69-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-286"><a href="#cb69-286" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-287"><a href="#cb69-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-288"><a href="#cb69-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-288"><a href="#cb69-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-289"><a href="#cb69-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-290"><a href="#cb69-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-291"><a href="#cb69-291" aria-hidden="true" tabindex="-1"></a>Democrat</span>
+<span id="cb69-290"><a href="#cb69-290" aria-hidden="true" tabindex="-1"></a>Democrat</span>
+<span id="cb69-291"><a href="#cb69-291" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-294"><a href="#cb69-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb69-295"><a href="#cb69-295" aria-hidden="true" tabindex="-1"></a>blue_facet2 <span class="ot">&lt;-</span> blue_comments <span class="sc">%&gt;%</span></span>
 <span id="cb69-296"><a href="#cb69-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(comment) <span class="sc">%&gt;%</span></span>
@@ -3923,56 +3923,56 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-321"><a href="#cb69-321" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zipf's Law: Text Representation</span></span>
 <span id="cb69-322"><a href="#cb69-322" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-323"><a href="#cb69-323" aria-hidden="true" tabindex="-1"></a><span class="fu">### Blue</span></span>
-<span id="cb69-326"><a href="#cb69-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-327"><a href="#cb69-327" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(blue_dfm),<span class="at">dec=</span>T))</span>
-<span id="cb69-328"><a href="#cb69-328" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
-<span id="cb69-329"><a href="#cb69-329" aria-hidden="true" tabindex="-1"></a>word_counts<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(blue_dfm))</span>
-<span id="cb69-330"><a href="#cb69-330" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span>
-<span id="cb69-331"><a href="#cb69-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-332"><a href="#cb69-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-333"><a href="#cb69-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-334"><a href="#cb69-334" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Red</span></span>
-<span id="cb69-337"><a href="#cb69-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-338"><a href="#cb69-338" aria-hidden="true" tabindex="-1"></a>word_counts2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(red_dfm),<span class="at">dec=</span>T))</span>
-<span id="cb69-339"><a href="#cb69-339" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
-<span id="cb69-340"><a href="#cb69-340" aria-hidden="true" tabindex="-1"></a>word_counts2<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(red_dfm))</span>
-<span id="cb69-341"><a href="#cb69-341" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts2)</span>
-<span id="cb69-342"><a href="#cb69-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-343"><a href="#cb69-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-324"><a href="#cb69-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-327"><a href="#cb69-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-328"><a href="#cb69-328" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(blue_dfm),<span class="at">dec=</span>T))</span>
+<span id="cb69-329"><a href="#cb69-329" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
+<span id="cb69-330"><a href="#cb69-330" aria-hidden="true" tabindex="-1"></a>word_counts<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(blue_dfm))</span>
+<span id="cb69-331"><a href="#cb69-331" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span>
+<span id="cb69-332"><a href="#cb69-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-333"><a href="#cb69-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-334"><a href="#cb69-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-335"><a href="#cb69-335" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Red</span></span>
+<span id="cb69-336"><a href="#cb69-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-339"><a href="#cb69-339" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-340"><a href="#cb69-340" aria-hidden="true" tabindex="-1"></a>word_counts2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(red_dfm),<span class="at">dec=</span>T))</span>
+<span id="cb69-341"><a href="#cb69-341" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
+<span id="cb69-342"><a href="#cb69-342" aria-hidden="true" tabindex="-1"></a>word_counts2<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(red_dfm))</span>
+<span id="cb69-343"><a href="#cb69-343" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts2)</span>
 <span id="cb69-344"><a href="#cb69-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-345"><a href="#cb69-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-346"><a href="#cb69-346" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Models: /r/democrats</span></span>
-<span id="cb69-347"><a href="#cb69-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-350"><a href="#cb69-350" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-351"><a href="#cb69-351" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb69-352"><a href="#cb69-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-353"><a href="#cb69-353" aria-hidden="true" tabindex="-1"></a>ctm_blue <span class="ot">&lt;-</span> <span class="fu">CTM</span>(blue_dfm, <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"VEM"</span>, <span class="at">control =</span> <span class="cn">NULL</span>, <span class="at">model =</span> <span class="st">"ctm"</span>)</span>
-<span id="cb69-354"><a href="#cb69-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-355"><a href="#cb69-355" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_blue)</span>
-<span id="cb69-356"><a href="#cb69-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-357"><a href="#cb69-357" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ctm_blue, <span class="at">type =</span> <span class="st">"summary"</span>, <span class="at">main =</span> <span class="st">"Correlated Topic Model: /r/democrats"</span>)</span>
-<span id="cb69-358"><a href="#cb69-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-359"><a href="#cb69-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-360"><a href="#cb69-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-361"><a href="#cb69-361" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Model: /r/republican</span></span>
-<span id="cb69-362"><a href="#cb69-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-365"><a href="#cb69-365" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-366"><a href="#cb69-366" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb69-367"><a href="#cb69-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-368"><a href="#cb69-368" aria-hidden="true" tabindex="-1"></a>ctm_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm,</span>
-<span id="cb69-369"><a href="#cb69-369" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
-<span id="cb69-370"><a href="#cb69-370" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> red_comments,</span>
-<span id="cb69-371"><a href="#cb69-371" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
-<span id="cb69-372"><a href="#cb69-372" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
-<span id="cb69-373"><a href="#cb69-373" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
-<span id="cb69-374"><a href="#cb69-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-345"><a href="#cb69-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-346"><a href="#cb69-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-347"><a href="#cb69-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Models: /r/democrats</span></span>
+<span id="cb69-348"><a href="#cb69-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-351"><a href="#cb69-351" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-352"><a href="#cb69-352" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb69-353"><a href="#cb69-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-354"><a href="#cb69-354" aria-hidden="true" tabindex="-1"></a>ctm_blue <span class="ot">&lt;-</span> <span class="fu">CTM</span>(blue_dfm, <span class="dv">10</span>, <span class="at">method =</span> <span class="st">"VEM"</span>, <span class="at">control =</span> <span class="cn">NULL</span>, <span class="at">model =</span> <span class="st">"ctm"</span>)</span>
+<span id="cb69-355"><a href="#cb69-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-356"><a href="#cb69-356" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_blue)</span>
+<span id="cb69-357"><a href="#cb69-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-358"><a href="#cb69-358" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ctm_blue, <span class="at">type =</span> <span class="st">"summary"</span>, <span class="at">main =</span> <span class="st">"Correlated Topic Model: /r/democrats"</span>)</span>
+<span id="cb69-359"><a href="#cb69-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-360"><a href="#cb69-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-361"><a href="#cb69-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-362"><a href="#cb69-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Model: /r/republican</span></span>
+<span id="cb69-363"><a href="#cb69-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-366"><a href="#cb69-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-367"><a href="#cb69-367" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb69-368"><a href="#cb69-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-369"><a href="#cb69-369" aria-hidden="true" tabindex="-1"></a>ctm_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm,</span>
+<span id="cb69-370"><a href="#cb69-370" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
+<span id="cb69-371"><a href="#cb69-371" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> red_comments,</span>
+<span id="cb69-372"><a href="#cb69-372" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
+<span id="cb69-373"><a href="#cb69-373" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
+<span id="cb69-374"><a href="#cb69-374" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
 <span id="cb69-375"><a href="#cb69-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-376"><a href="#cb69-376" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(ctm_red)</span>
-<span id="cb69-377"><a href="#cb69-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-378"><a href="#cb69-378" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ctm_red, <span class="at">type =</span> <span class="st">"summary"</span>, <span class="at">main =</span> <span class="st">"Correlated Topic Model: /r/republicans"</span>)</span>
-<span id="cb69-379"><a href="#cb69-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-380"><a href="#cb69-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb69-381"><a href="#cb69-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-376"><a href="#cb69-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-377"><a href="#cb69-377" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(ctm_red)</span>
+<span id="cb69-378"><a href="#cb69-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-379"><a href="#cb69-379" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ctm_red, <span class="at">type =</span> <span class="st">"summary"</span>, <span class="at">main =</span> <span class="st">"Correlated Topic Model: /r/republicans"</span>)</span>
+<span id="cb69-380"><a href="#cb69-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-381"><a href="#cb69-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-382"><a href="#cb69-382" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-383"><a href="#cb69-383" aria-hidden="true" tabindex="-1"></a><span class="fu">## LDA: /r/democrats</span></span>
 <span id="cb69-384"><a href="#cb69-384" aria-hidden="true" tabindex="-1"></a></span>
@@ -4010,21 +4010,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-424"><a href="#cb69-424" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-425"><a href="#cb69-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb69-426"><a href="#cb69-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-427"><a href="#cb69-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-430"><a href="#cb69-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb69-431"><a href="#cb69-431" aria-hidden="true" tabindex="-1"></a>red.topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda_model_red, <span class="at">matrix =</span> <span class="st">"beta"</span>)</span>
-<span id="cb69-432"><a href="#cb69-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-433"><a href="#cb69-433" aria-hidden="true" tabindex="-1"></a>red.terms <span class="ot">&lt;-</span> red.topics <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb69-434"><a href="#cb69-434" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
-<span id="cb69-435"><a href="#cb69-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-436"><a href="#cb69-436" aria-hidden="true" tabindex="-1"></a>red.terms <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder</span>(term, beta)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span> </span>
-<span id="cb69-437"><a href="#cb69-437" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">labeller =</span> <span class="st">"label_both"</span>) <span class="sc">+</span> </span>
-<span id="cb69-438"><a href="#cb69-438" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Terms"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Topics"</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb69-439"><a href="#cb69-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top Terms per Topic in /r/republicans with LDA Topic Modeling"</span>)</span>
-<span id="cb69-440"><a href="#cb69-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-429"><a href="#cb69-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb69-430"><a href="#cb69-430" aria-hidden="true" tabindex="-1"></a>red.topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda_model_red, <span class="at">matrix =</span> <span class="st">"beta"</span>)</span>
+<span id="cb69-431"><a href="#cb69-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-432"><a href="#cb69-432" aria-hidden="true" tabindex="-1"></a>red.terms <span class="ot">&lt;-</span> red.topics <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb69-433"><a href="#cb69-433" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
+<span id="cb69-434"><a href="#cb69-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-435"><a href="#cb69-435" aria-hidden="true" tabindex="-1"></a>red.terms <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder</span>(term, beta)) <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span> </span>
+<span id="cb69-436"><a href="#cb69-436" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">labeller =</span> <span class="st">"label_both"</span>) <span class="sc">+</span> </span>
+<span id="cb69-437"><a href="#cb69-437" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Terms"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Topics"</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb69-438"><a href="#cb69-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top Terms per Topic in /r/republicans with LDA Topic Modeling"</span>)</span>
+<span id="cb69-439"><a href="#cb69-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb69-440"><a href="#cb69-440" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-441"><a href="#cb69-441" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitations</span></span>
 <span id="cb69-442"><a href="#cb69-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-443"><a href="#cb69-443" aria-hidden="true" tabindex="-1"></a>The main limitation with this study is the fact I had such an unbalanced data set between the two subreddits. /r/democrats had an exceptionally large set of comments compared to /r/republicans, which forced me to focus more on /r/democrats. In a future study, I would look for a right-wing subreddit that mirrors the amount of members as /r/democrats or combine multiple subreddits to get a data set that could rivial the membership numbers. </span>
+<span id="cb69-443"><a href="#cb69-443" aria-hidden="true" tabindex="-1"></a>The main limitation with this study is the fact I had such an unbalanced data set between the two subreddits. /r/democrats had an exceptionally large set of comments compared to /r/republicans, which forced me to focus more on /r/democrats. In a future study, I would look for a right-wing subreddit that mirrors the amount of members as /r/democrats or combine multiple subreddits to get a data set that could rivial the membership numbers.</span>
 <span id="cb69-444"><a href="#cb69-444" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-445"><a href="#cb69-445" aria-hidden="true" tabindex="-1"></a><span class="fu">## Previous Research</span></span>
 <span id="cb69-446"><a href="#cb69-446" aria-hidden="true" tabindex="-1"></a></span>
@@ -4034,8 +4034,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb69-450"><a href="#cb69-450" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-451"><a href="#cb69-451" aria-hidden="true" tabindex="-1"></a>Determining Presidential Approval Rating Using Reddit Sentiment Analysis: https://towardsdatascience.com/determining-presidential-approval-rating-using-reddit-sentiment-analysis-7912fdb5fcc7</span>
 <span id="cb69-452"><a href="#cb69-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-453"><a href="#cb69-453" aria-hidden="true" tabindex="-1"></a>https://www.researchgate.net/publication/349794705_Populist_Supporters_on_Reddit_A_Comparison_of_Content_and_Behavioral_Patterns_Within_Publics_of_Supporters_of_Donald_Trump_and_Hillary_Clinton</span>
-<span id="cb69-454"><a href="#cb69-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-453"><a href="#cb69-453" aria-hidden="true" tabindex="-1"></a>https://www.researchgate.net/publication/349794705_Populist_Supporters_on_Reddit_A\_Comparison_of_Content_and_Behavioral_Patterns_Within_Publics_of_Supporters_of_Donald_Trump_and_Hillary_Clinton</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
