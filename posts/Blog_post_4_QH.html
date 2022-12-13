@@ -193,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Blog_post_4</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
   <div class="quarto-categories">
-    <div class="quarto-category">blog</div>
+    <div class="quarto-category">Blog Post 4</div>
   </div>
   </div>
 
@@ -269,28 +269,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(blue_dfm),<span class="at">dec=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue_comments<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in corpus(blue_comments$comment): object 'blue_comments' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens(blue_corpus, remove_punct = T, remove_symbols = T, remove_url = T, : object 'blue_corpus' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens, <span class="at">selection =</span> <span class="st">"remove"</span>, <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens_select(blue_tokens, selection = "remove", pattern = stopwords("en")): object 'blue_tokens' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(blue_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens_select(x, ..., selection = "remove"): object 'blue_tokens' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> blue_tokens<span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens_tolower(.): object 'blue_tokens' not found</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(blue_dfm),<span class="at">dec=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'colSums': object 'blue_dfm' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in colnames(word_counts) &lt;- c("Frequency"): object 'word_counts' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>word_counts<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(blue_dfm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>word_counts<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(blue_dfm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in ncol(blue_dfm): object 'blue_dfm' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in head(word_counts): object 'word_counts' not found</code></pre>
@@ -300,10 +345,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in ggplot(word_counts, mapping = aes(x = Rank, y = Frequency)): object 'word_counts' not found</code></pre>
@@ -315,28 +360,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>word_counts2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(red_dfm),<span class="at">dec=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in corpus(red_comments$comment): object 'red_comments' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens(red_corpus, remove_punct = T, remove_symbols = T, remove_url = T, : object 'red_corpus' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens, <span class="at">selection =</span> <span class="st">"remove"</span>, <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens_select(red_tokens, selection = "remove", pattern = stopwords("en")): object 'red_tokens' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(red_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>, <span class="st">"anyone"</span>, <span class="st">"one"</span>, <span class="st">"say"</span>, <span class="st">"take"</span>, <span class="st">"much"</span>, <span class="st">"last"</span>, <span class="st">"never"</span>, <span class="st">"changed"</span>, <span class="st">"just"</span>, <span class="st">"questions"</span>, <span class="st">"r"</span>, <span class="st">"please"</span>, <span class="st">"note"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens_select(x, ..., selection = "remove"): object 'red_tokens' not found</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> red_tokens<span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error in tokens_tolower(.): object 'red_tokens' not found</code></pre>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>word_counts2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(red_dfm),<span class="at">dec=</span>T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'colSums': object 'red_dfm' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in colnames(word_counts2) &lt;- c("Frequency"): object 'word_counts2' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>word_counts2<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(red_dfm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>word_counts2<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(red_dfm))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in ncol(red_dfm): object 'red_dfm' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in head(word_counts2): object 'word_counts2' not found</code></pre>
@@ -347,10 +437,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts2, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts2, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in ggplot(word_counts2, mapping = aes(x = Rank, y = Frequency)): object 'word_counts2' not found</code></pre>
@@ -365,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>red_LMRD <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_loughran_mcdonald<span class="sc">$</span>docname)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>red_LMRD <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_loughran_mcdonald<span class="sc">$</span>docname)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in corpus(red_loughran_mcdonald$docname): object 'red_loughran_mcdonald' not found</code></pre>
@@ -375,9 +465,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(red_corpus, <span class="st">"id"</span>) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(red_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(red_corpus, <span class="st">"id"</span>) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(red_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in ndoc(red_corpus): object 'red_corpus' not found</code></pre>
@@ -387,28 +477,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in corpus(red_comments$comment): object 'red_comments' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">ndoc</span>(red_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">ndoc</span>(red_corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in ndoc(red_corpus): object 'red_corpus' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, .<span class="dv">6</span> <span class="sc">*</span> N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, .<span class="dv">6</span> <span class="sc">*</span> N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in sample(1:N, 0.6 * N): object 'N' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>N)[<span class="sc">-</span>train]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>N)[<span class="sc">-</span>train]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'N' not found</code></pre>
@@ -420,14 +510,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>stm_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> blue_comments,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>stm_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> blue_comments,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in asSTMCorpus(documents, vocab, data): object 'blue_dfm' not found</code></pre>
@@ -436,7 +526,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in labelTopics(stm_blue): object 'stm_blue' not found</code></pre>
@@ -446,7 +536,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_blue, <span class="at">type =</span> <span class="st">"summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_blue, <span class="at">type =</span> <span class="st">"summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in plot(stm_blue, type = "summary"): object 'stm_blue' not found</code></pre>
@@ -458,14 +548,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>stm_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm,</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> red_comments,</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>stm_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm,</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> red_comments,</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in asSTMCorpus(documents, vocab, data): object 'red_dfm' not found</code></pre>
@@ -474,7 +564,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in labelTopics(stm_red): object 'stm_red' not found</code></pre>
@@ -484,7 +574,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_red, <span class="at">type =</span> <span class="st">"summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_red, <span class="at">type =</span> <span class="st">"summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in plot(stm_red, type = "summary"): object 'stm_red' not found</code></pre>
@@ -496,7 +586,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
 <pre><code>randomForest 4.7-1.1</code></pre>
@@ -523,7 +613,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>blue_small_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(blue_dfm, <span class="at">min_docfreq =</span> <span class="dv">10</span>, <span class="at">min_termfreq =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>blue_small_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(blue_dfm, <span class="at">min_docfreq =</span> <span class="dv">10</span>, <span class="at">min_termfreq =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in dfm_trim(blue_dfm, min_docfreq = 10, min_termfreq = 10): object 'blue_dfm' not found</code></pre>
@@ -532,7 +622,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>dfmTrainSmallblue <span class="ot">&lt;-</span> <span class="fu">convert</span>(blue_small_dfm, <span class="at">to =</span> <span class="st">"matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>dfmTrainSmallblue <span class="ot">&lt;-</span> <span class="fu">convert</span>(blue_small_dfm, <span class="at">to =</span> <span class="st">"matrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in convert(blue_small_dfm, to = "matrix"): object 'blue_small_dfm' not found</code></pre>
@@ -544,14 +634,14 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>cor_top_model_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>cor_top_model_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in asSTMCorpus(documents, vocab, data): object 'blue_dfm' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in summary(cor_top_model_blue): object 'cor_top_model_blue' not found</code></pre>
@@ -561,7 +651,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in labelTopics(cor_top_model_blue): object 'cor_top_model_blue' not found</code></pre>
@@ -571,7 +661,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_blue, <span class="at">texts =</span> blue_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_blue, <span class="at">texts =</span> blue_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in findThoughts(cor_top_model_blue, texts = blue_comments$comment, : object 'cor_top_model_blue' not found</code></pre>
@@ -583,14 +673,14 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>cor_top_model_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>cor_top_model_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in asSTMCorpus(documents, vocab, data): object 'red_dfm' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in summary(cor_top_model_red): object 'cor_top_model_red' not found</code></pre>
@@ -599,7 +689,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in labelTopics(cor_top_model_red): object 'cor_top_model_red' not found</code></pre>
@@ -608,7 +698,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_red, <span class="at">texts =</span> red_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_red, <span class="at">texts =</span> red_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in findThoughts(cor_top_model_red, texts = red_comments$comment, : object 'cor_top_model_red' not found</code></pre>
@@ -620,35 +710,35 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>blue_lda_tokens <span class="ot">&lt;-</span> <span class="fu">word_tokenizer</span>(blue_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>blue_lda_tokens <span class="ot">&lt;-</span> <span class="fu">word_tokenizer</span>(blue_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in stringi::stri_split_boundaries(strings, type = "word", skip_word_none = TRUE): object 'blue_tokens' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(blue_lda_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(blue_lda_tokens)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'blue_lda_tokens' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>it_d <span class="ot">&lt;-</span> <span class="fu">itoken</span>(blue_lda_tokens, <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>it_d <span class="ot">&lt;-</span> <span class="fu">itoken</span>(blue_lda_tokens, <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in itoken(blue_lda_tokens, progressbar = FALSE): object 'blue_lda_tokens' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">create_vocabulary</span>(it_d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">create_vocabulary</span>(it_d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in create_vocabulary(it_d): object 'it_d' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'd_v' not found</code></pre>
@@ -658,14 +748,14 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">prune_vocabulary</span>(d_v, <span class="at">term_count_min =</span> <span class="dv">10</span>, <span class="at">doc_proportion_max =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">prune_vocabulary</span>(d_v, <span class="at">term_count_min =</span> <span class="dv">10</span>, <span class="at">doc_proportion_max =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in prune_vocabulary(d_v, term_count_min = 10, doc_proportion_max = 0.2): object 'd_v' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'd_v' not found</code></pre>
@@ -675,14 +765,14 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>vectorizer_d <span class="ot">&lt;-</span> <span class="fu">vocab_vectorizer</span>(d_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>vectorizer_d <span class="ot">&lt;-</span> <span class="fu">vocab_vectorizer</span>(d_v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in force(vocabulary): object 'd_v' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>blue_dtm <span class="ot">&lt;-</span> <span class="fu">create_dtm</span>(it_d, vectorizer, <span class="at">type =</span> <span class="st">"dgTMatrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>blue_dtm <span class="ot">&lt;-</span> <span class="fu">create_dtm</span>(it_d, vectorizer, <span class="at">type =</span> <span class="st">"dgTMatrix"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in create_dtm(it_d, vectorizer, type = "dgTMatrix"): object 'it_d' not found</code></pre>
@@ -692,17 +782,17 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create new LDA model</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>lda_model_dems <span class="ot">&lt;-</span> LDA<span class="sc">$</span><span class="fu">new</span>(<span class="at">n_topics =</span> <span class="dv">10</span>, <span class="at">doc_topic_prior =</span> <span class="fl">0.1</span>,</span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">topic_word_prior =</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create new LDA model</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>lda_model_dems <span class="ot">&lt;-</span> LDA<span class="sc">$</span><span class="fu">new</span>(<span class="at">n_topics =</span> <span class="dv">10</span>, <span class="at">doc_topic_prior =</span> <span class="fl">0.1</span>,</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">topic_word_prior =</span> <span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in LDA$new: object of type 'closure' is not subsettable</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print other methods for LDA</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>lda_model_dems</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print other methods for LDA</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>lda_model_dems</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'lda_model_dems' not found</code></pre>
@@ -711,11 +801,11 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting model</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>doc_topic_distr <span class="ot">&lt;-</span> </span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  lda_model_dems<span class="sc">$</span><span class="fu">fit_transform</span>(<span class="at">x =</span> blue_dtm, <span class="at">n_iter =</span> <span class="dv">1000</span>,</span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">convergence_tol =</span> <span class="fl">0.001</span>, <span class="at">n_check_convergence =</span> <span class="dv">25</span>,</span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting model</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>doc_topic_distr <span class="ot">&lt;-</span> </span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  lda_model_dems<span class="sc">$</span><span class="fu">fit_transform</span>(<span class="at">x =</span> blue_dtm, <span class="at">n_iter =</span> <span class="dv">1000</span>,</span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">convergence_tol =</span> <span class="fl">0.001</span>, <span class="at">n_check_convergence =</span> <span class="dv">25</span>,</span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'lda_model_dems' not found</code></pre>
@@ -725,8 +815,8 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">get_top_words</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">topic_number =</span> <span class="fu">c</span>(1L, 5L),</span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">lambda =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">get_top_words</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">topic_number =</span> <span class="fu">c</span>(1L, 5L),</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">lambda =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'lda_model_dems' not found</code></pre>
@@ -735,7 +825,7 @@ Attaching package: 'randomForest'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in eval(expr, envir, enclos): object 'lda_model_dems' not found</code></pre>
@@ -910,334 +1000,372 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="DACSS/DACSS_[Course Number]_[Course Name_[term]" data-repo-id="" data-category="Announcements" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb100" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blog_post_4"</span></span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Quinn He"</span></span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="an">desription:</span><span class="co"> "Something to describe what I did"</span></span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "11/28/2022"</span></span>
-<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="co">  - blog </span></span>
-<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-18"><a href="#cb100-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-19"><a href="#cb100-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb100-20"><a href="#cb100-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb100-21"><a href="#cb100-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-22"><a href="#cb100-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb100-23"><a href="#cb100-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span>
-<span id="cb100-24"><a href="#cb100-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(syuzhet)</span>
-<span id="cb100-25"><a href="#cb100-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb100-26"><a href="#cb100-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb100-27"><a href="#cb100-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb100-28"><a href="#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cleanNLP)</span>
-<span id="cb100-29"><a href="#cb100-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb100-30"><a href="#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
-<span id="cb100-31"><a href="#cb100-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.sentiment)</span>
-<span id="cb100-32"><a href="#cb100-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb100-33"><a href="#cb100-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
-<span id="cb100-34"><a href="#cb100-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textstats)</span>
-<span id="cb100-35"><a href="#cb100-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(text2vec)</span>
-<span id="cb100-36"><a href="#cb100-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
-<span id="cb100-37"><a href="#cb100-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
-<span id="cb100-38"><a href="#cb100-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-39"><a href="#cb100-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visNetwork)</span>
-<span id="cb100-40"><a href="#cb100-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb100-41"><a href="#cb100-41" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
-<span id="cb100-42"><a href="#cb100-42" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb100-43"><a href="#cb100-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-44"><a href="#cb100-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-45"><a href="#cb100-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
-<span id="cb100-46"><a href="#cb100-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-47"><a href="#cb100-47" aria-hidden="true" tabindex="-1"></a>My data includes Reddit comments from /r/democrats and /r/republican that was scrapped using the RedditExtractoR package on November 8,2022, a day after the midterm elections. I named the main data frame for each subreddit "blue_comments" and "red_comments" respectively in order to make it quicker and easier to use in code. /r/democrats has 26764 comments and /r/republican has 1535 comments. I may try to repull more up to day comments for the final project, but I am unsure at this time. /r/democrats is the significantly larger subreddit with 431,799 users. /r/republican has 184,429 users, both as of Nov. 19, 2022.</span>
-<span id="cb100-48"><a href="#cb100-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-49"><a href="#cb100-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Questions</span></span>
-<span id="cb100-50"><a href="#cb100-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-51"><a href="#cb100-51" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Which subreddit tends to have more negative speech according to multiple sentiment analysis dictionaries?</span>
-<span id="cb100-52"><a href="#cb100-52" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Generally, how do they each talk about different keywords in context?</span>
-<span id="cb100-53"><a href="#cb100-53" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>What topics are most popular amongst the both subreddits?</span>
-<span id="cb100-54"><a href="#cb100-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-55"><a href="#cb100-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes</span></span>
-<span id="cb100-56"><a href="#cb100-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-57"><a href="#cb100-57" aria-hidden="true" tabindex="-1"></a>I may want to add sentiment columns to the main comments data sets for each subreddit.</span>
-<span id="cb100-58"><a href="#cb100-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-59"><a href="#cb100-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-60"><a href="#cb100-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Text Representation with Zipf's Law</span></span>
-<span id="cb100-61"><a href="#cb100-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-62"><a href="#cb100-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### Democrats</span></span>
-<span id="cb100-63"><a href="#cb100-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-66"><a href="#cb100-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-67"><a href="#cb100-67" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(blue_dfm),<span class="at">dec=</span>T))</span>
-<span id="cb100-68"><a href="#cb100-68" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
-<span id="cb100-69"><a href="#cb100-69" aria-hidden="true" tabindex="-1"></a>word_counts<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(blue_dfm))</span>
-<span id="cb100-70"><a href="#cb100-70" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span>
-<span id="cb100-71"><a href="#cb100-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-72"><a href="#cb100-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-73"><a href="#cb100-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-74"><a href="#cb100-74" aria-hidden="true" tabindex="-1"></a>I really do not know what "t" could be so I must remember to remove that in future preprocessing in the final blog post.</span>
-<span id="cb100-75"><a href="#cb100-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-78"><a href="#cb100-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-79"><a href="#cb100-79" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
-<span id="cb100-80"><a href="#cb100-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb100-81"><a href="#cb100-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
-<span id="cb100-82"><a href="#cb100-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb100-83"><a href="#cb100-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-84"><a href="#cb100-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-85"><a href="#cb100-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-86"><a href="#cb100-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Republicans</span></span>
-<span id="cb100-87"><a href="#cb100-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-90"><a href="#cb100-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-91"><a href="#cb100-91" aria-hidden="true" tabindex="-1"></a>word_counts2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(red_dfm),<span class="at">dec=</span>T))</span>
-<span id="cb100-92"><a href="#cb100-92" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
-<span id="cb100-93"><a href="#cb100-93" aria-hidden="true" tabindex="-1"></a>word_counts2<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(red_dfm))</span>
-<span id="cb100-94"><a href="#cb100-94" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts2)</span>
-<span id="cb100-95"><a href="#cb100-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-96"><a href="#cb100-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-97"><a href="#cb100-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-98"><a href="#cb100-98" aria-hidden="true" tabindex="-1"></a>In both dfms, "people" is the top used word. Again this "t" shows up as a frequent word. If I look at both wordcounts, it may help show which words are still unnecessary for my analysis. The issue with this research is the size discrepancies between the two subreddits. Based off the head of the wordcounts alone, I can see they talk about the same subject for the most part, but the context is the most important aspect. An LDA model would help me better understand what topics are discussed in the subreddits. I would expect some overlap because they are both political forums, but the question is how do they talk about these topics and what other language do they use. As stated in other research, reddit is not the best to observe to get a large portion of the population's opinions on certain subjects, but it does offer a view of how users of similar interests talk and discuss.</span>
-<span id="cb100-99"><a href="#cb100-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-100"><a href="#cb100-100" aria-hidden="true" tabindex="-1"></a>This whole analysis is just to see how the two subreddits communicate. Do they communicate differently about the same subjects? Is there any cross talk between the two subreddits?</span>
-<span id="cb100-101"><a href="#cb100-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-104"><a href="#cb100-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-105"><a href="#cb100-105" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts2, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
-<span id="cb100-106"><a href="#cb100-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb100-107"><a href="#cb100-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
-<span id="cb100-108"><a href="#cb100-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb100-109"><a href="#cb100-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-110"><a href="#cb100-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-111"><a href="#cb100-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-112"><a href="#cb100-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## Supervised Learning</span></span>
-<span id="cb100-113"><a href="#cb100-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-114"><a href="#cb100-114" aria-hidden="true" tabindex="-1"></a>Here I will try to implement supervised learning methods onto the republicans subreddit comments dataset because it's smaller than the democrats one. I'll have to create a training and test data set. Since I am only attempting this, I do not yet know if it will end up in the final project, but I want to see how it will be useful to my analysis of the two subreddits.</span>
-<span id="cb100-115"><a href="#cb100-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-116"><a href="#cb100-116" aria-hidden="true" tabindex="-1"></a>First I'll set the seed to make sure this is reproducible and then create an id variable in the corpus.</span>
-<span id="cb100-117"><a href="#cb100-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-120"><a href="#cb100-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-121"><a href="#cb100-121" aria-hidden="true" tabindex="-1"></a>red_LMRD <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_loughran_mcdonald<span class="sc">$</span>docname)</span>
-<span id="cb100-122"><a href="#cb100-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-123"><a href="#cb100-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-124"><a href="#cb100-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-125"><a href="#cb100-125" aria-hidden="true" tabindex="-1"></a>I cannot seem to create a corpus here. I don't know if it is because of the particular data frame I am using or for another reason. I will have to figure this out in order to do supervised learning.</span>
-<span id="cb100-126"><a href="#cb100-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-129"><a href="#cb100-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-130"><a href="#cb100-130" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb100-131"><a href="#cb100-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-132"><a href="#cb100-132" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(red_corpus, <span class="st">"id"</span>) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(red_corpus)</span>
-<span id="cb100-133"><a href="#cb100-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-134"><a href="#cb100-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-135"><a href="#cb100-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-136"><a href="#cb100-136" aria-hidden="true" tabindex="-1"></a>Below I split the data into a test set and a training set. N is shown by the total number of features in the data set with the ndoc function. The "train" variable is takes a sample of N(60%) with .6 <span class="sc">\*</span> N. The test set is just the entire data set minus the train 60%.</span>
-<span id="cb100-137"><a href="#cb100-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-140"><a href="#cb100-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-141"><a href="#cb100-141" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
-<span id="cb100-142"><a href="#cb100-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-143"><a href="#cb100-143" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">ndoc</span>(red_corpus)</span>
-<span id="cb100-144"><a href="#cb100-144" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, .<span class="dv">6</span> <span class="sc">*</span> N)</span>
-<span id="cb100-145"><a href="#cb100-145" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>N)[<span class="sc">-</span>train]</span>
-<span id="cb100-146"><a href="#cb100-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-147"><a href="#cb100-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-148"><a href="#cb100-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-149"><a href="#cb100-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-150"><a href="#cb100-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-151"><a href="#cb100-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-152"><a href="#cb100-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## Structured Topic Models: /r/democrats</span></span>
-<span id="cb100-153"><a href="#cb100-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-156"><a href="#cb100-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-157"><a href="#cb100-157" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb100-158"><a href="#cb100-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-159"><a href="#cb100-159" aria-hidden="true" tabindex="-1"></a>stm_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm,</span>
-<span id="cb100-160"><a href="#cb100-160" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
-<span id="cb100-161"><a href="#cb100-161" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> blue_comments,</span>
-<span id="cb100-162"><a href="#cb100-162" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
-<span id="cb100-163"><a href="#cb100-163" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
-<span id="cb100-164"><a href="#cb100-164" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
-<span id="cb100-165"><a href="#cb100-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-166"><a href="#cb100-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-167"><a href="#cb100-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-170"><a href="#cb100-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-171"><a href="#cb100-171" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_blue)</span>
-<span id="cb100-172"><a href="#cb100-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-173"><a href="#cb100-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-174"><a href="#cb100-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-175"><a href="#cb100-175" aria-hidden="true" tabindex="-1"></a>According to the topics above and their highest probability words, a few of them do make sense together. Topic 5 for example seems to be talking about a few different things, but if I look solely at Score, then it indicats discussion related to the war in Ukraine.</span>
-<span id="cb100-176"><a href="#cb100-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-179"><a href="#cb100-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-180"><a href="#cb100-180" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_blue, <span class="at">type =</span> <span class="st">"summary"</span>)</span>
-<span id="cb100-181"><a href="#cb100-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-182"><a href="#cb100-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-183"><a href="#cb100-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-184"><a href="#cb100-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-185"><a href="#cb100-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## Structured Topic Model: /r/republican</span></span>
-<span id="cb100-186"><a href="#cb100-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-189"><a href="#cb100-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-190"><a href="#cb100-190" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb100-191"><a href="#cb100-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-192"><a href="#cb100-192" aria-hidden="true" tabindex="-1"></a>stm_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm,</span>
-<span id="cb100-193"><a href="#cb100-193" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
-<span id="cb100-194"><a href="#cb100-194" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> red_comments,</span>
-<span id="cb100-195"><a href="#cb100-195" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
-<span id="cb100-196"><a href="#cb100-196" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
-<span id="cb100-197"><a href="#cb100-197" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
-<span id="cb100-198"><a href="#cb100-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-199"><a href="#cb100-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-200"><a href="#cb100-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-201"><a href="#cb100-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-204"><a href="#cb100-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-205"><a href="#cb100-205" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_red)</span>
-<span id="cb100-206"><a href="#cb100-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-207"><a href="#cb100-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-208"><a href="#cb100-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-209"><a href="#cb100-209" aria-hidden="true" tabindex="-1"></a>For the republican subreddit there is a bit of name calling going on against biden. Some of the terms I am unsure of like amputatorbot, politifact, and bidenflaction. A few I can piece together. One topic is kind of related to the conspiracy of the election being stolen from Trump.</span>
-<span id="cb100-210"><a href="#cb100-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-213"><a href="#cb100-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-214"><a href="#cb100-214" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_red, <span class="at">type =</span> <span class="st">"summary"</span>)</span>
-<span id="cb100-215"><a href="#cb100-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-216"><a href="#cb100-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-217"><a href="#cb100-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-218"><a href="#cb100-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## Random Forests: /r/democrats</span></span>
-<span id="cb100-219"><a href="#cb100-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-222"><a href="#cb100-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-223"><a href="#cb100-223" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
-<span id="cb100-224"><a href="#cb100-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-225"><a href="#cb100-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-226"><a href="#cb100-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-227"><a href="#cb100-227" aria-hidden="true" tabindex="-1"></a>Here I make a smaller dfm with the blue dfm because I do not want to run something that will take too long to execute.</span>
-<span id="cb100-228"><a href="#cb100-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-231"><a href="#cb100-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-232"><a href="#cb100-232" aria-hidden="true" tabindex="-1"></a>blue_small_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(blue_dfm, <span class="at">min_docfreq =</span> <span class="dv">10</span>, <span class="at">min_termfreq =</span> <span class="dv">10</span>)</span>
-<span id="cb100-233"><a href="#cb100-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-234"><a href="#cb100-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-235"><a href="#cb100-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-236"><a href="#cb100-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-239"><a href="#cb100-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-240"><a href="#cb100-240" aria-hidden="true" tabindex="-1"></a>dfmTrainSmallblue <span class="ot">&lt;-</span> <span class="fu">convert</span>(blue_small_dfm, <span class="at">to =</span> <span class="st">"matrix"</span>)</span>
-<span id="cb100-241"><a href="#cb100-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-242"><a href="#cb100-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-243"><a href="#cb100-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-244"><a href="#cb100-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-245"><a href="#cb100-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-246"><a href="#cb100-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-247"><a href="#cb100-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Model: /r/democrats</span></span>
-<span id="cb100-248"><a href="#cb100-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-251"><a href="#cb100-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-252"><a href="#cb100-252" aria-hidden="true" tabindex="-1"></a>cor_top_model_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
-<span id="cb100-253"><a href="#cb100-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-254"><a href="#cb100-254" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_blue)</span>
-<span id="cb100-255"><a href="#cb100-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-256"><a href="#cb100-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-257"><a href="#cb100-257" aria-hidden="true" tabindex="-1"></a>I'll get names for the topic models with the next function. While the names won't be super neat, ideal names, it will provide a quick and easy way to discern what topics are.</span>
-<span id="cb100-258"><a href="#cb100-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-261"><a href="#cb100-261" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-262"><a href="#cb100-262" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_blue)</span>
-<span id="cb100-263"><a href="#cb100-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-264"><a href="#cb100-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-265"><a href="#cb100-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-266"><a href="#cb100-266" aria-hidden="true" tabindex="-1"></a>Below are the top 5 documents in each of the 5 topics. I like this visualization because it's helpful to check back the above function and see the full context of the comments.</span>
-<span id="cb100-267"><a href="#cb100-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-270"><a href="#cb100-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-271"><a href="#cb100-271" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_blue, <span class="at">texts =</span> blue_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span>
-<span id="cb100-272"><a href="#cb100-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-273"><a href="#cb100-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-274"><a href="#cb100-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-275"><a href="#cb100-275" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Model: /r/republican</span></span>
-<span id="cb100-276"><a href="#cb100-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-279"><a href="#cb100-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-280"><a href="#cb100-280" aria-hidden="true" tabindex="-1"></a>cor_top_model_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
-<span id="cb100-281"><a href="#cb100-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-282"><a href="#cb100-282" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_red)</span>
-<span id="cb100-283"><a href="#cb100-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-284"><a href="#cb100-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-285"><a href="#cb100-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-286"><a href="#cb100-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-289"><a href="#cb100-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-290"><a href="#cb100-290" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_red)</span>
-<span id="cb100-291"><a href="#cb100-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-292"><a href="#cb100-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-293"><a href="#cb100-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-296"><a href="#cb100-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-297"><a href="#cb100-297" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_red, <span class="at">texts =</span> red_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span>
-<span id="cb100-298"><a href="#cb100-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-299"><a href="#cb100-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-300"><a href="#cb100-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-301"><a href="#cb100-301" aria-hidden="true" tabindex="-1"></a><span class="fu">## Topic Modeling</span></span>
-<span id="cb100-302"><a href="#cb100-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-305"><a href="#cb100-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-306"><a href="#cb100-306" aria-hidden="true" tabindex="-1"></a>blue_lda_tokens <span class="ot">&lt;-</span> <span class="fu">word_tokenizer</span>(blue_tokens)</span>
-<span id="cb100-307"><a href="#cb100-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-308"><a href="#cb100-308" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(blue_lda_tokens)</span>
-<span id="cb100-309"><a href="#cb100-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-310"><a href="#cb100-310" aria-hidden="true" tabindex="-1"></a>it_d <span class="ot">&lt;-</span> <span class="fu">itoken</span>(blue_lda_tokens, <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb100-311"><a href="#cb100-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-312"><a href="#cb100-312" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">create_vocabulary</span>(it_d)</span>
-<span id="cb100-313"><a href="#cb100-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-314"><a href="#cb100-314" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span>
-<span id="cb100-315"><a href="#cb100-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-316"><a href="#cb100-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-317"><a href="#cb100-317" aria-hidden="true" tabindex="-1"></a>Trimming the vocab</span>
-<span id="cb100-318"><a href="#cb100-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-321"><a href="#cb100-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-322"><a href="#cb100-322" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">prune_vocabulary</span>(d_v, <span class="at">term_count_min =</span> <span class="dv">10</span>, <span class="at">doc_proportion_max =</span> <span class="fl">0.2</span>)</span>
-<span id="cb100-323"><a href="#cb100-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-324"><a href="#cb100-324" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span>
-<span id="cb100-325"><a href="#cb100-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-326"><a href="#cb100-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-327"><a href="#cb100-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-328"><a href="#cb100-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-329"><a href="#cb100-329" aria-hidden="true" tabindex="-1"></a>Also creating the dtm</span>
-<span id="cb100-330"><a href="#cb100-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-333"><a href="#cb100-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-334"><a href="#cb100-334" aria-hidden="true" tabindex="-1"></a>vectorizer_d <span class="ot">&lt;-</span> <span class="fu">vocab_vectorizer</span>(d_v)</span>
-<span id="cb100-335"><a href="#cb100-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-336"><a href="#cb100-336" aria-hidden="true" tabindex="-1"></a>blue_dtm <span class="ot">&lt;-</span> <span class="fu">create_dtm</span>(it_d, vectorizer, <span class="at">type =</span> <span class="st">"dgTMatrix"</span>)</span>
-<span id="cb100-337"><a href="#cb100-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-338"><a href="#cb100-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-339"><a href="#cb100-339" aria-hidden="true" tabindex="-1"></a>This code below does not seem to work. </span>
-<span id="cb100-342"><a href="#cb100-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-343"><a href="#cb100-343" aria-hidden="true" tabindex="-1"></a><span class="co"># create new LDA model</span></span>
-<span id="cb100-344"><a href="#cb100-344" aria-hidden="true" tabindex="-1"></a>lda_model_dems <span class="ot">&lt;-</span> LDA<span class="sc">$</span><span class="fu">new</span>(<span class="at">n_topics =</span> <span class="dv">10</span>, <span class="at">doc_topic_prior =</span> <span class="fl">0.1</span>,</span>
-<span id="cb100-345"><a href="#cb100-345" aria-hidden="true" tabindex="-1"></a>                     <span class="at">topic_word_prior =</span> <span class="fl">0.01</span>)</span>
-<span id="cb100-346"><a href="#cb100-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-347"><a href="#cb100-347" aria-hidden="true" tabindex="-1"></a><span class="co"># print other methods for LDA</span></span>
-<span id="cb100-348"><a href="#cb100-348" aria-hidden="true" tabindex="-1"></a>lda_model_dems</span>
-<span id="cb100-349"><a href="#cb100-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-350"><a href="#cb100-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-351"><a href="#cb100-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-354"><a href="#cb100-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-355"><a href="#cb100-355" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting model</span></span>
-<span id="cb100-356"><a href="#cb100-356" aria-hidden="true" tabindex="-1"></a>doc_topic_distr <span class="ot">&lt;-</span> </span>
-<span id="cb100-357"><a href="#cb100-357" aria-hidden="true" tabindex="-1"></a>  lda_model_dems<span class="sc">$</span><span class="fu">fit_transform</span>(<span class="at">x =</span> blue_dtm, <span class="at">n_iter =</span> <span class="dv">1000</span>,</span>
-<span id="cb100-358"><a href="#cb100-358" aria-hidden="true" tabindex="-1"></a>                          <span class="at">convergence_tol =</span> <span class="fl">0.001</span>, <span class="at">n_check_convergence =</span> <span class="dv">25</span>,</span>
-<span id="cb100-359"><a href="#cb100-359" aria-hidden="true" tabindex="-1"></a>                          <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb100-360"><a href="#cb100-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-361"><a href="#cb100-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-362"><a href="#cb100-362" aria-hidden="true" tabindex="-1"></a>Get the top words from the model. I was trying to get the top words before I fit the model, but I guess it doesn't work like that. I'm follow the steps of the tutorial to get an idea of how it works on other data.</span>
-<span id="cb100-363"><a href="#cb100-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-366"><a href="#cb100-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-367"><a href="#cb100-367" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">get_top_words</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">topic_number =</span> <span class="fu">c</span>(1L, 5L),</span>
-<span id="cb100-368"><a href="#cb100-368" aria-hidden="true" tabindex="-1"></a>                        <span class="at">lambda =</span> <span class="fl">0.2</span>)</span>
-<span id="cb100-369"><a href="#cb100-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-370"><a href="#cb100-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-371"><a href="#cb100-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-374"><a href="#cb100-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb100-375"><a href="#cb100-375" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">plot</span>()</span>
-<span id="cb100-376"><a href="#cb100-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb100-377"><a href="#cb100-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-378"><a href="#cb100-378" aria-hidden="true" tabindex="-1"></a>I need to set K to maybe 5. I don't want too many topics. I also need to do more preprocessing in the final form of this because there are a few words I do not care for like t, thing, m, still, say, etc. When I set lamda to 0.2 to 0.4 I get a more concentrated view of the terms. I must look up more about the lower lamdas. I think having 10 topics may be too much, but I like I can see clear overlap in certain topics. The rhetoric of this democrat LDA model does not seem to hostile or even related to much of anything. </span>
-<span id="cb100-379"><a href="#cb100-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-380"><a href="#cb100-380" aria-hidden="true" tabindex="-1"></a>In future analysis, I will want to do some more preprocessing to clean up excess words. In this analysis I am finding there are a bit too many words I see as irrelevant.</span>
-<span id="cb100-381"><a href="#cb100-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-382"><a href="#cb100-382" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final Notes and Thoughts for Blog Post 5</span></span>
-<span id="cb100-383"><a href="#cb100-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-384"><a href="#cb100-384" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Set up individual meeting to go over project and other blog posts</span>
-<span id="cb100-385"><a href="#cb100-385" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Dictonary comparison is about finding the best dictionary for my data set. Always look at multiple dictionaries</span>
-<span id="cb100-386"><a href="#cb100-386" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Blog Post 5 should focus on a more narrative structure to discuss background and what I want to accomplish in the study. Discuss any issues I have been having or start setting up the structure of the project.</span>
-<span id="cb100-387"><a href="#cb100-387" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Render Blog Post 4 as a PDF or html so he doesnt have to run my long, intensive chunks of code.</span>
-<span id="cb100-388"><a href="#cb100-388" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Should I implement Naive Bayes classifier</span>
+<div class="sourceCode" id="cb120" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blog_post_4"</span></span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Quinn He"</span></span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a><span class="an">desription:</span><span class="co"> "Something to describe what I did"</span></span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "11/28/2022"</span></span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb120-9"><a href="#cb120-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb120-10"><a href="#cb120-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb120-11"><a href="#cb120-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb120-12"><a href="#cb120-12" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb120-13"><a href="#cb120-13" aria-hidden="true" tabindex="-1"></a><span class="co">  - Blog Post 4</span></span>
+<span id="cb120-14"><a href="#cb120-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb120-15"><a href="#cb120-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-18"><a href="#cb120-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-19"><a href="#cb120-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb120-20"><a href="#cb120-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb120-21"><a href="#cb120-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-22"><a href="#cb120-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb120-23"><a href="#cb120-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span>
+<span id="cb120-24"><a href="#cb120-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(syuzhet)</span>
+<span id="cb120-25"><a href="#cb120-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb120-26"><a href="#cb120-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb120-27"><a href="#cb120-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb120-28"><a href="#cb120-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cleanNLP)</span>
+<span id="cb120-29"><a href="#cb120-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb120-30"><a href="#cb120-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.dictionaries)</span>
+<span id="cb120-31"><a href="#cb120-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.sentiment)</span>
+<span id="cb120-32"><a href="#cb120-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb120-33"><a href="#cb120-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb120-34"><a href="#cb120-34" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textstats)</span>
+<span id="cb120-35"><a href="#cb120-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(text2vec)</span>
+<span id="cb120-36"><a href="#cb120-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
+<span id="cb120-37"><a href="#cb120-37" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb120-38"><a href="#cb120-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-39"><a href="#cb120-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visNetwork)</span>
+<span id="cb120-40"><a href="#cb120-40" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb120-41"><a href="#cb120-41" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb120-42"><a href="#cb120-42" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb120-43"><a href="#cb120-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-44"><a href="#cb120-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-45"><a href="#cb120-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
+<span id="cb120-46"><a href="#cb120-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-47"><a href="#cb120-47" aria-hidden="true" tabindex="-1"></a>My data includes Reddit comments from /r/democrats and /r/republican that was scrapped using the RedditExtractoR package on November 8,2022, a day after the midterm elections. I named the main data frame for each subreddit "blue_comments" and "red_comments" respectively in order to make it quicker and easier to use in code. /r/democrats has 26764 comments and /r/republican has 1535 comments. I may try to repull more up to day comments for the final project, but I am unsure at this time. /r/democrats is the significantly larger subreddit with 431,799 users. /r/republican has 184,429 users, both as of Nov. 19, 2022.</span>
+<span id="cb120-48"><a href="#cb120-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-49"><a href="#cb120-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key Questions</span></span>
+<span id="cb120-50"><a href="#cb120-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-51"><a href="#cb120-51" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Which subreddit tends to have more negative speech according to multiple sentiment analysis dictionaries?</span>
+<span id="cb120-52"><a href="#cb120-52" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Generally, how do they each talk about different keywords in context?</span>
+<span id="cb120-53"><a href="#cb120-53" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>What topics are most popular amongst the both subreddits?</span>
+<span id="cb120-54"><a href="#cb120-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-55"><a href="#cb120-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes</span></span>
+<span id="cb120-56"><a href="#cb120-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-57"><a href="#cb120-57" aria-hidden="true" tabindex="-1"></a>I may want to add sentiment columns to the main comments data sets for each subreddit.</span>
+<span id="cb120-58"><a href="#cb120-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-59"><a href="#cb120-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Text Representation with Zipf's Law</span></span>
+<span id="cb120-60"><a href="#cb120-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-61"><a href="#cb120-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### Democrats</span></span>
+<span id="cb120-62"><a href="#cb120-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-65"><a href="#cb120-65" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-66"><a href="#cb120-66" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue_comments<span class="sc">$</span>comment)</span>
+<span id="cb120-67"><a href="#cb120-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-68"><a href="#cb120-68" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
+<span id="cb120-69"><a href="#cb120-69" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb120-70"><a href="#cb120-70" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
+<span id="cb120-71"><a href="#cb120-71" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
+<span id="cb120-72"><a href="#cb120-72" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb120-73"><a href="#cb120-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-74"><a href="#cb120-74" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens, <span class="at">selection =</span> <span class="st">"remove"</span>, <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb120-75"><a href="#cb120-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-76"><a href="#cb120-76" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
+<span id="cb120-77"><a href="#cb120-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-78"><a href="#cb120-78" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(blue_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>))</span>
+<span id="cb120-79"><a href="#cb120-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-80"><a href="#cb120-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-81"><a href="#cb120-81" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> blue_tokens<span class="sc">%&gt;%</span> </span>
+<span id="cb120-82"><a href="#cb120-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb120-83"><a href="#cb120-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
+<span id="cb120-84"><a href="#cb120-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-85"><a href="#cb120-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-88"><a href="#cb120-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-89"><a href="#cb120-89" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(blue_dfm),<span class="at">dec=</span>T))</span>
+<span id="cb120-90"><a href="#cb120-90" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
+<span id="cb120-91"><a href="#cb120-91" aria-hidden="true" tabindex="-1"></a>word_counts<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(blue_dfm))</span>
+<span id="cb120-92"><a href="#cb120-92" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span>
+<span id="cb120-93"><a href="#cb120-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-94"><a href="#cb120-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-95"><a href="#cb120-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-96"><a href="#cb120-96" aria-hidden="true" tabindex="-1"></a>I really do not know what "t" could be so I must remember to remove that in future preprocessing in the final blog post.</span>
+<span id="cb120-97"><a href="#cb120-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-100"><a href="#cb120-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-101"><a href="#cb120-101" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
+<span id="cb120-102"><a href="#cb120-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb120-103"><a href="#cb120-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
+<span id="cb120-104"><a href="#cb120-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb120-105"><a href="#cb120-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-106"><a href="#cb120-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-107"><a href="#cb120-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-108"><a href="#cb120-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### Republicans</span></span>
+<span id="cb120-109"><a href="#cb120-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-110"><a href="#cb120-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-113"><a href="#cb120-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-114"><a href="#cb120-114" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
+<span id="cb120-115"><a href="#cb120-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-116"><a href="#cb120-116" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
+<span id="cb120-117"><a href="#cb120-117" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb120-118"><a href="#cb120-118" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_symbols =</span> T,</span>
+<span id="cb120-119"><a href="#cb120-119" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_url =</span> T,</span>
+<span id="cb120-120"><a href="#cb120-120" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb120-121"><a href="#cb120-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-122"><a href="#cb120-122" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens, <span class="at">selection =</span> <span class="st">"remove"</span>, <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>))</span>
+<span id="cb120-123"><a href="#cb120-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-124"><a href="#cb120-124" aria-hidden="true" tabindex="-1"></a><span class="co">#I remove words that dont have any meaning to me that were in the network cloud.</span></span>
+<span id="cb120-125"><a href="#cb120-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-126"><a href="#cb120-126" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_remove</span>(red_tokens, <span class="fu">c</span>(<span class="st">"back"</span>, <span class="st">"really"</span>, <span class="st">"less"</span>, <span class="st">"saying"</span>, <span class="st">"look"</span>, <span class="st">"like"</span>, <span class="st">"get"</span>, <span class="st">"every"</span>, <span class="st">"said"</span>, <span class="st">"anything"</span>, <span class="st">"s"</span>, <span class="st">"right"</span>, <span class="st">"now"</span>, <span class="st">"see"</span>, <span class="st">"anyone"</span>, <span class="st">"one"</span>, <span class="st">"say"</span>, <span class="st">"take"</span>, <span class="st">"much"</span>, <span class="st">"last"</span>, <span class="st">"never"</span>, <span class="st">"changed"</span>, <span class="st">"just"</span>, <span class="st">"questions"</span>, <span class="st">"r"</span>, <span class="st">"please"</span>, <span class="st">"note"</span>))</span>
+<span id="cb120-127"><a href="#cb120-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-128"><a href="#cb120-128" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> red_tokens<span class="sc">%&gt;%</span> </span>
+<span id="cb120-129"><a href="#cb120-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tokens_tolower</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb120-130"><a href="#cb120-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm</span>()</span>
+<span id="cb120-131"><a href="#cb120-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-132"><a href="#cb120-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-133"><a href="#cb120-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-136"><a href="#cb120-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-137"><a href="#cb120-137" aria-hidden="true" tabindex="-1"></a>word_counts2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">sort</span>(<span class="fu">colSums</span>(red_dfm),<span class="at">dec=</span>T))</span>
+<span id="cb120-138"><a href="#cb120-138" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(word_counts2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Frequency"</span>)</span>
+<span id="cb120-139"><a href="#cb120-139" aria-hidden="true" tabindex="-1"></a>word_counts2<span class="sc">$</span>Rank <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(red_dfm))</span>
+<span id="cb120-140"><a href="#cb120-140" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts2)</span>
+<span id="cb120-141"><a href="#cb120-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-142"><a href="#cb120-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-143"><a href="#cb120-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-144"><a href="#cb120-144" aria-hidden="true" tabindex="-1"></a>In both dfms, "people" is the top used word. Again this "t" shows up as a frequent word. If I look at both wordcounts, it may help show which words are still unnecessary for my analysis. The issue with this research is the size discrepancies between the two subreddits. Based off the head of the wordcounts alone, I can see they talk about the same subject for the most part, but the context is the most important aspect. An LDA model would help me better understand what topics are discussed in the subreddits. I would expect some overlap because they are both political forums, but the question is how do they talk about these topics and what other language do they use. As stated in other research, reddit is not the best to observe to get a large portion of the population's opinions on certain subjects, but it does offer a view of how users of similar interests talk and discuss.</span>
+<span id="cb120-145"><a href="#cb120-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-146"><a href="#cb120-146" aria-hidden="true" tabindex="-1"></a>This whole analysis is just to see how the two subreddits communicate. Do they communicate differently about the same subjects? Is there any cross talk between the two subreddits?</span>
+<span id="cb120-147"><a href="#cb120-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-150"><a href="#cb120-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-151"><a href="#cb120-151" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(word_counts2, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Rank, <span class="at">y =</span> Frequency)) <span class="sc">+</span> </span>
+<span id="cb120-152"><a href="#cb120-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb120-153"><a href="#cb120-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Zipf's Law"</span>, <span class="at">x =</span> <span class="st">"Rank"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span> </span>
+<span id="cb120-154"><a href="#cb120-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb120-155"><a href="#cb120-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-156"><a href="#cb120-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-157"><a href="#cb120-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-158"><a href="#cb120-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## Supervised Learning</span></span>
+<span id="cb120-159"><a href="#cb120-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-160"><a href="#cb120-160" aria-hidden="true" tabindex="-1"></a>Here I will try to implement supervised learning methods onto the republicans subreddit comments dataset because it's smaller than the democrats one. I'll have to create a training and test data set. Since I am only attempting this, I do not yet know if it will end up in the final project, but I want to see how it will be useful to my analysis of the two subreddits.</span>
+<span id="cb120-161"><a href="#cb120-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-162"><a href="#cb120-162" aria-hidden="true" tabindex="-1"></a>First I'll set the seed to make sure this is reproducible and then create an id variable in the corpus.</span>
+<span id="cb120-163"><a href="#cb120-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-166"><a href="#cb120-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-167"><a href="#cb120-167" aria-hidden="true" tabindex="-1"></a>red_LMRD <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_loughran_mcdonald<span class="sc">$</span>docname)</span>
+<span id="cb120-168"><a href="#cb120-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-169"><a href="#cb120-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-170"><a href="#cb120-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-171"><a href="#cb120-171" aria-hidden="true" tabindex="-1"></a>I cannot seem to create a corpus here. I don't know if it is because of the particular data frame I am using or for another reason. I will have to figure this out in order to do supervised learning.</span>
+<span id="cb120-172"><a href="#cb120-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-175"><a href="#cb120-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-176"><a href="#cb120-176" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb120-177"><a href="#cb120-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-178"><a href="#cb120-178" aria-hidden="true" tabindex="-1"></a><span class="fu">docvars</span>(red_corpus, <span class="st">"id"</span>) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ndoc</span>(red_corpus)</span>
+<span id="cb120-179"><a href="#cb120-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-180"><a href="#cb120-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-181"><a href="#cb120-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-182"><a href="#cb120-182" aria-hidden="true" tabindex="-1"></a>Below I split the data into a test set and a training set. N is shown by the total number of features in the data set with the ndoc function. The "train" variable is takes a sample of N(60%) with .6 <span class="sc">\*</span> N. The test set is just the entire data set minus the train 60%.</span>
+<span id="cb120-183"><a href="#cb120-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-186"><a href="#cb120-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-187"><a href="#cb120-187" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
+<span id="cb120-188"><a href="#cb120-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-189"><a href="#cb120-189" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">ndoc</span>(red_corpus)</span>
+<span id="cb120-190"><a href="#cb120-190" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>N, .<span class="dv">6</span> <span class="sc">*</span> N)</span>
+<span id="cb120-191"><a href="#cb120-191" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>N)[<span class="sc">-</span>train]</span>
+<span id="cb120-192"><a href="#cb120-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-193"><a href="#cb120-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-194"><a href="#cb120-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-195"><a href="#cb120-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-196"><a href="#cb120-196" aria-hidden="true" tabindex="-1"></a><span class="fu">## Structured Topic Models: /r/democrats</span></span>
+<span id="cb120-197"><a href="#cb120-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-200"><a href="#cb120-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-201"><a href="#cb120-201" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb120-202"><a href="#cb120-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-203"><a href="#cb120-203" aria-hidden="true" tabindex="-1"></a>stm_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm,</span>
+<span id="cb120-204"><a href="#cb120-204" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
+<span id="cb120-205"><a href="#cb120-205" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> blue_comments,</span>
+<span id="cb120-206"><a href="#cb120-206" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
+<span id="cb120-207"><a href="#cb120-207" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
+<span id="cb120-208"><a href="#cb120-208" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
+<span id="cb120-209"><a href="#cb120-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-210"><a href="#cb120-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-211"><a href="#cb120-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-214"><a href="#cb120-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-215"><a href="#cb120-215" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_blue)</span>
+<span id="cb120-216"><a href="#cb120-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-217"><a href="#cb120-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-218"><a href="#cb120-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-219"><a href="#cb120-219" aria-hidden="true" tabindex="-1"></a>According to the topics above and their highest probability words, a few of them do make sense together. Topic 5 for example seems to be talking about a few different things, but if I look solely at Score, then it indicats discussion related to the war in Ukraine.</span>
+<span id="cb120-220"><a href="#cb120-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-223"><a href="#cb120-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-224"><a href="#cb120-224" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_blue, <span class="at">type =</span> <span class="st">"summary"</span>)</span>
+<span id="cb120-225"><a href="#cb120-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-226"><a href="#cb120-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-227"><a href="#cb120-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-228"><a href="#cb120-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## Structured Topic Model: /r/republican</span></span>
+<span id="cb120-229"><a href="#cb120-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-232"><a href="#cb120-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-233"><a href="#cb120-233" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb120-234"><a href="#cb120-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-235"><a href="#cb120-235" aria-hidden="true" tabindex="-1"></a>stm_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm,</span>
+<span id="cb120-236"><a href="#cb120-236" aria-hidden="true" tabindex="-1"></a>               <span class="at">K =</span> k,</span>
+<span id="cb120-237"><a href="#cb120-237" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> red_comments,</span>
+<span id="cb120-238"><a href="#cb120-238" aria-hidden="true" tabindex="-1"></a>               <span class="at">max.em.its =</span> <span class="dv">1000</span>,</span>
+<span id="cb120-239"><a href="#cb120-239" aria-hidden="true" tabindex="-1"></a>               <span class="at">seed =</span> <span class="dv">1234</span>,</span>
+<span id="cb120-240"><a href="#cb120-240" aria-hidden="true" tabindex="-1"></a>               <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
+<span id="cb120-241"><a href="#cb120-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-242"><a href="#cb120-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-243"><a href="#cb120-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-244"><a href="#cb120-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-247"><a href="#cb120-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-248"><a href="#cb120-248" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(stm_red)</span>
+<span id="cb120-249"><a href="#cb120-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-250"><a href="#cb120-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-251"><a href="#cb120-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-252"><a href="#cb120-252" aria-hidden="true" tabindex="-1"></a>For the republican subreddit there is a bit of name calling going on against biden. Some of the terms I am unsure of like amputatorbot, politifact, and bidenflaction. A few I can piece together. One topic is kind of related to the conspiracy of the election being stolen from Trump.</span>
+<span id="cb120-253"><a href="#cb120-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-256"><a href="#cb120-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-257"><a href="#cb120-257" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(stm_red, <span class="at">type =</span> <span class="st">"summary"</span>)</span>
+<span id="cb120-258"><a href="#cb120-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-259"><a href="#cb120-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-260"><a href="#cb120-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-261"><a href="#cb120-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## Random Forests: /r/democrats</span></span>
+<span id="cb120-262"><a href="#cb120-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-265"><a href="#cb120-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-266"><a href="#cb120-266" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span>
+<span id="cb120-267"><a href="#cb120-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-268"><a href="#cb120-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-269"><a href="#cb120-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-270"><a href="#cb120-270" aria-hidden="true" tabindex="-1"></a>Here I make a smaller dfm with the blue dfm because I do not want to run something that will take too long to execute.</span>
+<span id="cb120-271"><a href="#cb120-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-274"><a href="#cb120-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-275"><a href="#cb120-275" aria-hidden="true" tabindex="-1"></a>blue_small_dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(blue_dfm, <span class="at">min_docfreq =</span> <span class="dv">10</span>, <span class="at">min_termfreq =</span> <span class="dv">10</span>)</span>
+<span id="cb120-276"><a href="#cb120-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-277"><a href="#cb120-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-278"><a href="#cb120-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-279"><a href="#cb120-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-282"><a href="#cb120-282" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-283"><a href="#cb120-283" aria-hidden="true" tabindex="-1"></a>dfmTrainSmallblue <span class="ot">&lt;-</span> <span class="fu">convert</span>(blue_small_dfm, <span class="at">to =</span> <span class="st">"matrix"</span>)</span>
+<span id="cb120-284"><a href="#cb120-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-285"><a href="#cb120-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-286"><a href="#cb120-286" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-287"><a href="#cb120-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-288"><a href="#cb120-288" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Model: /r/democrats</span></span>
+<span id="cb120-289"><a href="#cb120-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-292"><a href="#cb120-292" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-293"><a href="#cb120-293" aria-hidden="true" tabindex="-1"></a>cor_top_model_blue <span class="ot">&lt;-</span> <span class="fu">stm</span>(blue_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
+<span id="cb120-294"><a href="#cb120-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-295"><a href="#cb120-295" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_blue)</span>
+<span id="cb120-296"><a href="#cb120-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-297"><a href="#cb120-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-298"><a href="#cb120-298" aria-hidden="true" tabindex="-1"></a>I'll get names for the topic models with the next function. While the names won't be super neat, ideal names, it will provide a quick and easy way to discern what topics are.</span>
+<span id="cb120-299"><a href="#cb120-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-302"><a href="#cb120-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-303"><a href="#cb120-303" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_blue)</span>
+<span id="cb120-304"><a href="#cb120-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-305"><a href="#cb120-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-306"><a href="#cb120-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-307"><a href="#cb120-307" aria-hidden="true" tabindex="-1"></a>Below are the top 5 documents in each of the 5 topics. I like this visualization because it's helpful to check back the above function and see the full context of the comments.</span>
+<span id="cb120-308"><a href="#cb120-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-311"><a href="#cb120-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-312"><a href="#cb120-312" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_blue, <span class="at">texts =</span> blue_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb120-313"><a href="#cb120-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-314"><a href="#cb120-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-315"><a href="#cb120-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-316"><a href="#cb120-316" aria-hidden="true" tabindex="-1"></a><span class="fu">## Correlated Topic Model: /r/republican</span></span>
+<span id="cb120-317"><a href="#cb120-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-320"><a href="#cb120-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-321"><a href="#cb120-321" aria-hidden="true" tabindex="-1"></a>cor_top_model_red <span class="ot">&lt;-</span> <span class="fu">stm</span>(red_dfm, <span class="at">K =</span> <span class="dv">5</span>, <span class="at">verbose =</span> F, <span class="at">init.type =</span> <span class="st">"Spectral"</span>)</span>
+<span id="cb120-322"><a href="#cb120-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-323"><a href="#cb120-323" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cor_top_model_red)</span>
+<span id="cb120-324"><a href="#cb120-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-325"><a href="#cb120-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-326"><a href="#cb120-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-327"><a href="#cb120-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-330"><a href="#cb120-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-331"><a href="#cb120-331" aria-hidden="true" tabindex="-1"></a><span class="fu">labelTopics</span>(cor_top_model_red)</span>
+<span id="cb120-332"><a href="#cb120-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-333"><a href="#cb120-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-334"><a href="#cb120-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-337"><a href="#cb120-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-338"><a href="#cb120-338" aria-hidden="true" tabindex="-1"></a><span class="fu">findThoughts</span>(cor_top_model_red, <span class="at">texts =</span> red_comments<span class="sc">$</span>comment, <span class="at">topics =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="at">n =</span> <span class="dv">1</span>)</span>
+<span id="cb120-339"><a href="#cb120-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-340"><a href="#cb120-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-341"><a href="#cb120-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-342"><a href="#cb120-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## Topic Modeling</span></span>
+<span id="cb120-343"><a href="#cb120-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-346"><a href="#cb120-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-347"><a href="#cb120-347" aria-hidden="true" tabindex="-1"></a>blue_lda_tokens <span class="ot">&lt;-</span> <span class="fu">word_tokenizer</span>(blue_tokens)</span>
+<span id="cb120-348"><a href="#cb120-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-349"><a href="#cb120-349" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(blue_lda_tokens)</span>
+<span id="cb120-350"><a href="#cb120-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-351"><a href="#cb120-351" aria-hidden="true" tabindex="-1"></a>it_d <span class="ot">&lt;-</span> <span class="fu">itoken</span>(blue_lda_tokens, <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb120-352"><a href="#cb120-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-353"><a href="#cb120-353" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">create_vocabulary</span>(it_d)</span>
+<span id="cb120-354"><a href="#cb120-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-355"><a href="#cb120-355" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span>
+<span id="cb120-356"><a href="#cb120-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-357"><a href="#cb120-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-358"><a href="#cb120-358" aria-hidden="true" tabindex="-1"></a>Trimming the vocab</span>
+<span id="cb120-359"><a href="#cb120-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-362"><a href="#cb120-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-363"><a href="#cb120-363" aria-hidden="true" tabindex="-1"></a>d_v <span class="ot">&lt;-</span> <span class="fu">prune_vocabulary</span>(d_v, <span class="at">term_count_min =</span> <span class="dv">10</span>, <span class="at">doc_proportion_max =</span> <span class="fl">0.2</span>)</span>
+<span id="cb120-364"><a href="#cb120-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-365"><a href="#cb120-365" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d_v)</span>
+<span id="cb120-366"><a href="#cb120-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-367"><a href="#cb120-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-368"><a href="#cb120-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-369"><a href="#cb120-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-370"><a href="#cb120-370" aria-hidden="true" tabindex="-1"></a>Also creating the dtm</span>
+<span id="cb120-371"><a href="#cb120-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-374"><a href="#cb120-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-375"><a href="#cb120-375" aria-hidden="true" tabindex="-1"></a>vectorizer_d <span class="ot">&lt;-</span> <span class="fu">vocab_vectorizer</span>(d_v)</span>
+<span id="cb120-376"><a href="#cb120-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-377"><a href="#cb120-377" aria-hidden="true" tabindex="-1"></a>blue_dtm <span class="ot">&lt;-</span> <span class="fu">create_dtm</span>(it_d, vectorizer, <span class="at">type =</span> <span class="st">"dgTMatrix"</span>)</span>
+<span id="cb120-378"><a href="#cb120-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-379"><a href="#cb120-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-380"><a href="#cb120-380" aria-hidden="true" tabindex="-1"></a>This code below does not seem to work.</span>
+<span id="cb120-381"><a href="#cb120-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-384"><a href="#cb120-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-385"><a href="#cb120-385" aria-hidden="true" tabindex="-1"></a><span class="co"># create new LDA model</span></span>
+<span id="cb120-386"><a href="#cb120-386" aria-hidden="true" tabindex="-1"></a>lda_model_dems <span class="ot">&lt;-</span> LDA<span class="sc">$</span><span class="fu">new</span>(<span class="at">n_topics =</span> <span class="dv">10</span>, <span class="at">doc_topic_prior =</span> <span class="fl">0.1</span>,</span>
+<span id="cb120-387"><a href="#cb120-387" aria-hidden="true" tabindex="-1"></a>                     <span class="at">topic_word_prior =</span> <span class="fl">0.01</span>)</span>
+<span id="cb120-388"><a href="#cb120-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-389"><a href="#cb120-389" aria-hidden="true" tabindex="-1"></a><span class="co"># print other methods for LDA</span></span>
+<span id="cb120-390"><a href="#cb120-390" aria-hidden="true" tabindex="-1"></a>lda_model_dems</span>
+<span id="cb120-391"><a href="#cb120-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-392"><a href="#cb120-392" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-393"><a href="#cb120-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-396"><a href="#cb120-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-397"><a href="#cb120-397" aria-hidden="true" tabindex="-1"></a><span class="co"># fitting model</span></span>
+<span id="cb120-398"><a href="#cb120-398" aria-hidden="true" tabindex="-1"></a>doc_topic_distr <span class="ot">&lt;-</span> </span>
+<span id="cb120-399"><a href="#cb120-399" aria-hidden="true" tabindex="-1"></a>  lda_model_dems<span class="sc">$</span><span class="fu">fit_transform</span>(<span class="at">x =</span> blue_dtm, <span class="at">n_iter =</span> <span class="dv">1000</span>,</span>
+<span id="cb120-400"><a href="#cb120-400" aria-hidden="true" tabindex="-1"></a>                          <span class="at">convergence_tol =</span> <span class="fl">0.001</span>, <span class="at">n_check_convergence =</span> <span class="dv">25</span>,</span>
+<span id="cb120-401"><a href="#cb120-401" aria-hidden="true" tabindex="-1"></a>                          <span class="at">progressbar =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb120-402"><a href="#cb120-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-403"><a href="#cb120-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-404"><a href="#cb120-404" aria-hidden="true" tabindex="-1"></a>Get the top words from the model. I was trying to get the top words before I fit the model, but I guess it doesn't work like that. I'm follow the steps of the tutorial to get an idea of how it works on other data.</span>
+<span id="cb120-405"><a href="#cb120-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-408"><a href="#cb120-408" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-409"><a href="#cb120-409" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">get_top_words</span>(<span class="at">n =</span> <span class="dv">5</span>, <span class="at">topic_number =</span> <span class="fu">c</span>(1L, 5L),</span>
+<span id="cb120-410"><a href="#cb120-410" aria-hidden="true" tabindex="-1"></a>                        <span class="at">lambda =</span> <span class="fl">0.2</span>)</span>
+<span id="cb120-411"><a href="#cb120-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-412"><a href="#cb120-412" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-413"><a href="#cb120-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-416"><a href="#cb120-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb120-417"><a href="#cb120-417" aria-hidden="true" tabindex="-1"></a>lda_model_dems<span class="sc">$</span><span class="fu">plot</span>()</span>
+<span id="cb120-418"><a href="#cb120-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb120-419"><a href="#cb120-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-420"><a href="#cb120-420" aria-hidden="true" tabindex="-1"></a>I need to set K to maybe 5. I don't want too many topics. I also need to do more preprocessing in the final form of this because there are a few words I do not care for like t, thing, m, still, say, etc. When I set lamda to 0.2 to 0.4 I get a more concentrated view of the terms. I must look up more about the lower lamdas. I think having 10 topics may be too much, but I like I can see clear overlap in certain topics. The rhetoric of this democrat LDA model does not seem to hostile or even related to much of anything.</span>
+<span id="cb120-421"><a href="#cb120-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-422"><a href="#cb120-422" aria-hidden="true" tabindex="-1"></a>In future analysis, I will want to do some more preprocessing to clean up excess words. In this analysis I am finding there are a bit too many words I see as irrelevant.</span>
+<span id="cb120-423"><a href="#cb120-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-424"><a href="#cb120-424" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final Notes and Thoughts for Blog Post 5</span></span>
+<span id="cb120-425"><a href="#cb120-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-426"><a href="#cb120-426" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Set up individual meeting to go over project and other blog posts</span>
+<span id="cb120-427"><a href="#cb120-427" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Dictonary comparison is about finding the best dictionary for my data set. Always look at multiple dictionaries</span>
+<span id="cb120-428"><a href="#cb120-428" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Blog Post 5 should focus on a more narrative structure to discuss background and what I want to accomplish in the study. Discuss any issues I have been having or start setting up the structure of the project.</span>
+<span id="cb120-429"><a href="#cb120-429" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Render Blog Post 4 as a PDF or html so he doesnt have to run my long, intensive chunks of code.</span>
+<span id="cb120-430"><a href="#cb120-430" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Should I implement Naive Bayes classifier</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
