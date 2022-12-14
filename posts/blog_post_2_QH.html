@@ -9,7 +9,7 @@
 <meta name="author" content="Quinn He">
 <meta name="dcterms.date" content="2022-10-19">
 
-<title>Quinn He’s Website - Text as Data Final Project</title>
+<title>Quinn He’s Website - Blog Post 2: Text</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -181,7 +181,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Text as Data Final Project</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Blog Post 2: Text</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
   <div class="quarto-categories">
     <div class="quarto-category">Blog Post 2</div>
   </div>
@@ -262,119 +262,100 @@ top.json?t=month&amp;limit=100': HTTP status was '429 Unknown Error'</code></pre
 <div class="cell-output cell-output-error">
 <pre><code>Error in value[[3L]](cond): Cannot read from Reddit, check your inputs or internet connection</code></pre>
 </div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>blue_comments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"blue_comments.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 26764 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (4): url, author, comment, comment_id
+dbl  (6): ...1, timestamp, score, upvotes, downvotes, golds
+date (1): date
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>red_comments <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"red_comments.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p>Word cloud for /r/democrats titles</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue_comments<span class="sc">$</span>comment)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(blue_tokens)<span class="sc">%&gt;%</span> </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(blue_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in corpus(blue$title): object 'blue' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in tokens(blue_corpus, remove_punct = T, remove_numbers = T): object 'blue_corpus' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in tokens_select(blue_tokens, pattern = stopwords("en"), selection = "remove"): object 'blue_tokens' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(blue_tokens)<span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in dfm(blue_tokens): object 'blue_tokens' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(blue_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in textplot_wordcloud(blue_dfm, max_words = 100, color = "blue"): object 'blue_dfm' not found</code></pre>
+<div class="cell-output-display">
+<p><img src="blog_post_2_QH_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Word cloud for /r/republicans titles</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(red_tokens) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(red_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in corpus(red$title): object 'red' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in tokens(red_corpus, remove_punct = T, remove_numbers = T): object 'red_corpus' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in tokens_select(red_tokens, pattern = stopwords("en"), selection = "remove"): object 'red_tokens' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(red_tokens) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in dfm(red_tokens): object 'red_tokens' not found</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(red_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in textplot_wordcloud(red_dfm, max_words = 100, color = "red"): object 'red_dfm' not found</code></pre>
+<div class="cell-output-display">
+<p><img src="blog_post_2_QH_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>This only gets the titles of the recent posts on the subreddit, but for now I will use it to just run sentiment analysis on that.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(red<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(red<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in get_nrc_sentiment(red$title): object 'red' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(blue<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(blue<span class="sc">$</span>title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in get_nrc_sentiment(blue$title): object 'blue' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(red_title_sent, red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(red_title_sent, red)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in cbind(red_title_sent, red): object 'red_title_sent' not found</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(blue_title_sent, blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(blue_title_sent, blue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error in cbind(blue_title_sent, blue): object 'blue_title_sent' not found</code></pre>
@@ -387,36 +368,23 @@ top.json?t=month&amp;limit=100': HTTP status was '429 Unknown Error'</code></pre
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>blue_url <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"https://www.reddit.com/r/democrats/comments/ye13dt/the_midterms_are_a_referendum_on_democracy_in/"</span>,</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ydqws7/vote_fetterman/"</span>,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ye1vqa/republicans_denounce_inflation_but_few_economists/"</span>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(blue_url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>blue_url <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"https://www.reddit.com/r/democrats/comments/ye13dt/the_midterms_are_a_referendum_on_democracy_in/"</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ydqws7/vote_fetterman/"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ye1vqa/republicans_denounce_inflation_but_few_economists/"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(blue_url)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>three_comments <span class="ot">&lt;-</span> comments[[<span class="st">"comments"</span>]] <span class="co">#this is from the "comments" dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in file(con, "r"): cannot open URL 'https://www.reddit.com/r/democrats/
-comments/ydqws7/vote_fetterman/.json?limit=500': HTTP status was '429 Unknown
-Error'</code></pre>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in value[[3L]](cond): Cannot read from Reddit, check your inputs or internet connection</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>three_comments <span class="ot">&lt;-</span> comments[[<span class="st">"comments"</span>]] <span class="co">#this is from the "comments" dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(expr, envir, enclos): object 'comments' not found</code></pre>
-</div>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>use get_thread_urls</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>then use <span class="fu">get_thread_content</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>use get_thread_urls</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>then use <span class="fu">get_thread_content</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
 <pre><code>Error: &lt;text&gt;:2:5: unexpected symbol
@@ -428,10 +396,513 @@ Error'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_nrc_sentiment</span>(three_comments<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_nrc_sentiment</span>(three_comments<span class="sc">$</span>comment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-error">
-<pre><code>Error in get_nrc_sentiment(three_comments$comment): object 'three_comments' not found</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `spread_()` was deprecated in tidyr 1.2.0.
+ℹ Please use `spread()` instead.
+ℹ The deprecated feature was likely used in the syuzhet package.
+  Please report the issue to the authors.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    anger anticipation disgust fear joy sadness surprise trust negative
+1       0            0       0    0   0       1        0     0        1
+2       1            2       0    1   1       1        0     3        1
+3       2            0       1    1   0       0        0     0        2
+4       1            2       1    1   1       1        0     4        1
+5       0            0       0    0   0       0        0     0        0
+6       2            1       0    0   1       1        1     1        2
+7       2            1       1    1   1       2        1     1        2
+8       0            0       0    0   0       0        0     0        0
+9       0            0       0    0   0       0        0     0        0
+10      1            1       1    1   0       1        1     0        1
+11      1            3       0    1   2       3        1     3        3
+12      0            0       0    0   0       0        0     0        1
+13      0            0       0    0   0       0        0     0        0
+14      2            0       2    2   0       3        0     0        4
+15      0            0       0    0   0       0        0     0        0
+16      2            4       0    2   2       2        0     3        4
+17      0            0       0    0   0       0        0     0        0
+18      0            2       0    0   1       2        2     1        2
+19      1            2       0    0   0       0        0     1        2
+20      0            0       0    0   0       0        0     0        0
+21      2            1       1    1   0       1        1     3        1
+22      1            0       0    1   0       1        0     1        1
+23      0            0       0    0   0       0        0     1        1
+24      0            0       0    0   0       0        0     0        0
+25      1            2       0    0   2       0        1     3        1
+26      0            0       0    0   0       0        0     0        0
+27      2            2       1    1   1       2        1     1        2
+28      0            0       0    0   0       0        0     0        0
+29      3            1       1    2   1       2        1     2        5
+30      2            2       3    1   1       2        0     2        4
+31      0            0       0    0   0       0        0     0        0
+32      0            2       0    1   1       0        2     2        0
+33      0            0       0    0   0       0        0     0        0
+34      0            0       0    0   1       0        0     1        0
+35      2            1       0    1   1       2        1     2        3
+36      4            0       1    4   1       5        1     5        7
+37      1            1       1    2   1       2        0     1        2
+38      1            1       0    1   3       1        1     3        1
+39      0            0       0    0   0       0        0     0        0
+40      0            0       0    0   0       0        0     0        0
+41      1            2       0    1   1       1        1     2        2
+42      2            1       1    1   1       5        1     1        5
+43      0            0       0    1   0       1        0     0        1
+44      0            0       0    0   0       0        0     0        0
+45      0            0       0    0   0       0        0     0        0
+46      1            1       4    3   1       3        0     2        4
+47      0            0       0    0   0       0        0     0        0
+48      0            0       0    0   0       0        0     0        0
+49      0            1       0    0   1       0        1     1        0
+50      0            1       0    0   0       0        0     0        0
+51      0            0       0    0   0       0        0     0        0
+52      1            1       1    1   1       2        1     3        2
+53      1            0       1    1   0       0        1     0        1
+54      1            0       0    1   0       0        0     0        1
+55      0            0       0    0   0       0        0     0        0
+56      4            0       3    3   0       1        0     1        4
+57      0            1       0    0   1       0        1     2        1
+58      0            1       0    0   1       0        1     3        0
+59      2            1       2    2   2       2        0     1        2
+60      0            1       0    0   0       0        0     0        0
+61      1            0       0    2   0       0        0     1        3
+62      0            0       0    0   0       0        0     0        0
+63      0            1       0    0   0       0        0     0        0
+64      0            1       0    0   0       0        0     1        0
+65      0            0       0    0   0       0        0     0        0
+66      3            1       0    0   1       1        1     3        3
+67      0            0       0    0   1       0        0     2        0
+68      2            1       1    2   1       2        1     2        3
+69      0            0       1    1   0       0        0     0        2
+70      3            0       1    0   0       0        1     1        3
+71      1            1       0    0   1       1        0     1        2
+72      0            1       0    0   1       1        0     1        2
+73      5            4       3    5   2       3        2     3        9
+74      3            1       3    3   0       2        1     0        5
+75      0            0       0    1   0       1        0     0        3
+76      0            0       0    0   0       0        0     0        0
+77      1            1       1    1   0       1        0     1        1
+78      0            0       0    0   0       0        0     0        0
+79      1            1       1    1   0       1        0     1        2
+80      1            0       0    0   0       0        1     1        3
+81      0            0       1    0   0       1        1     1        3
+82      4            0       2    4   0       3        2     0        6
+83      3            1       2    3   1       2        1     5        4
+84      0            0       0    1   0       1        0     1        4
+85      0            0       0    1   0       1        0     0        2
+86      0            0       1    1   1       1        0     1        1
+87      2            0       3    1   0       1        1     2        5
+88      1            1       0    0   1       1        1     1        1
+89      0            0       1    0   0       1        0     0        1
+90      1            0       1    2   0       1        0     3        2
+91      2            1       5    2   0       1        0     2        8
+92      1            0       1    1   0       0        1     0        1
+93      1            1       0    0   1       1        1     1        2
+94      0            1       0    0   1       0        0     1        0
+95      0            1       0    0   1       0        1     3        0
+96      1            1       1    0   1       0        1     1        0
+97      1            4       0    0   3       1        2     3        1
+98      2            2       1    0   2       1        3     2        2
+99      0            0       2    3   0       3        0     0        3
+100     0            0       0    0   1       0        0     1        0
+101     0            0       0    0   0       0        0     0        0
+102     1            0       1    2   1       2        0     1        2
+103     1            1       0    1   1       2        1     1        2
+104     2            0       2    0   1       0        0     2        3
+105     1            2       2    1   2       2        2     3        1
+106     0            0       0    0   0       0        0     0        0
+107     1            1       0    2   0       3        0     0        3
+108     0            0       0    0   0       0        0     0        0
+109     1            0       0    0   1       0        2     1        1
+110     0            0       0    0   0       0        0     0        0
+111     0            1       1    2   2       0        2     4        2
+112     0            2       0    0   1       1        2     1        2
+113     1            1       0    0   1       0        0     3        2
+114     0            1       0    0   1       0        1     1        0
+115     0            0       0    0   0       0        0     0        0
+116     0            0       1    2   1       1        0     1        4
+117     1            0       0    1   0       1        0     0        2
+118     1            0       0    1   0       0        0     1        1
+119     0            1       0    1   0       0        0     1        1
+120     0            1       0    1   0       0        0     0        0
+121     0            2       0    0   2       0        1     2        0
+122     2            1       0    0   1       2        1     4        4
+123     0            1       0    0   0       0        0     1        0
+124     1            0       0    1   0       1        0     0        1
+125     0            0       0    0   0       0        0     0        0
+126     1            1       0    0   0       0        0     0        1
+127     0            1       0    1   0       2        0     1        2
+128     3            4       1    2   3       4        1     4        4
+129     0            2       0    1   0       1        0     0        1
+130     1            0       1    0   0       0        0     1        1
+131     1            0       0    1   0       2        1     0        2
+132     0            0       0    0   0       0        0     1        0
+133     2            1       1    1   0       0        0     1        2
+134     1            1       0    1   1       2        1     1        2
+135     0            0       0    0   0       0        0     0        0
+136     0            0       0    0   0       0        0     0        0
+137     0            0       0    1   0       1        0     0        2
+138     2            1       1    2   0       2        0     0        3
+139     0            0       1    1   0       1        0     0        2
+140     3            2       1    4   3       5        2     6        6
+141     2            2       1    2   1       3        3     3        4
+142     1            1       0    0   1       2        1     1        2
+143     1            1       0    0   1       1        1     3        1
+144     2            2       1    1   1       2        2     3        4
+145     2            1       1    2   1       1        2     3        5
+146     1            0       0    1   0       1        1     0        1
+147     0            0       0    0   0       0        0     1        0
+148     1            1       1    1   1       1        0     2        0
+149     0            0       0    0   0       0        0     0        0
+150     0            0       0    0   0       0        0     0        0
+151     1            1       0    0   1       1        1     1        1
+152     1            1       0    0   1       1        1     1        1
+153     0            0       0    0   0       0        0     0        0
+154     1            2       0    0   2       1        2     2        1
+155     3            1       3    3   2       5        1     4        5
+156     0            0       0    0   0       0        0     2        0
+157     0            1       0    0   1       0        1     1        0
+158     0            1       0    0   1       0        0     1        0
+159     1            0       1    0   0       1        0     0        1
+160     0            0       0    0   0       0        0     0        0
+161     0            1       0    0   0       0        0     0        0
+162     2            0       2    3   0       3        1     0        3
+163     0            0       0    0   0       2        0     0        3
+164     2            1       1    3   1       4        1     3        3
+165     0            0       0    0   0       0        0     0        0
+166     0            0       0    1   0       1        0     0        2
+167     0            0       0    0   0       2        0     0        2
+168     2            1       0    0   1       1        1     1        2
+169     1            1       0    1   1       1        1     2        1
+170     3            0       3    2   0       2        1     1        6
+171     1            0       1    1   0       0        1     1        2
+172     2            0       1    2   0       1        2     0        2
+173     5            3       3    2   3       5        3     3        7
+174     1            0       1    1   0       0        2     0        1
+175     0            0       0    0   0       0        0     0        0
+176     0            0       0    0   0       0        0     0        0
+177     0            0       0    0   0       0        0     0        0
+178     0            0       0    0   0       0        0     0        0
+179     0            0       0    0   1       0        0     2        0
+180     0            0       0    0   0       0        0     0        0
+181     1            1       0    0   1       1        1     1        1
+182     0            0       0    0   0       0        0     0        0
+183     0            0       0    0   0       0        0     0        0
+184     0            0       0    0   0       0        0     0        0
+185     0            0       0    0   0       1        0     0        1
+186     0            0       0    0   0       0        0     0        0
+187     0            0       0    0   0       0        0     0        0
+188     1            2       0    0   1       2        1     1        2
+189     0            0       0    0   0       0        0     0        0
+190     0            0       0    0   0       0        0     0        0
+191     0            0       0    0   0       0        0     0        0
+192     0            0       0    0   0       0        0     0        0
+193     0            0       0    0   0       0        0     0        0
+194     0            0       0    0   0       0        0     0        0
+195     3            1       1    1   2       1        3     1        3
+196     0            0       0    0   0       0        0     0        0
+197     0            0       0    0   0       0        1     0        0
+198     4            5       1    4   1       2        3     2        4
+199     0            0       0    1   0       1        0     0        1
+200     0            1       0    0   1       0        1     2        0
+201     0            0       0    0   0       0        0     0        0
+202     0            0       0    0   0       0        0     0        0
+203     0            0       0    0   0       0        0     0        0
+204     0            0       0    0   0       0        0     0        0
+205     0            0       0    0   0       0        0     0        0
+206     1            3       3    1   2       1        1     2        3
+207     0            0       0    0   0       0        0     0        0
+208     0            0       0    1   0       1        0     0        3
+209     0            0       0    0   0       0        0     0        0
+210     0            0       0    0   0       0        0     0        0
+211     0            1       0    0   0       0        0     2        0
+212     0            1       0    0   0       0        1     0        1
+213     0            0       0    0   0       0        0     0        0
+214     2            0       2    2   0       1        1     0        2
+215     1            0       1    1   0       1        0     0        1
+216     0            0       1    1   0       1        0     0        1
+217     0            0       0    0   0       1        0     1        1
+218     1            0       1    1   1       2        0     3        2
+219     1            1       0    1   1       0        1     1        1
+220     1            0       1    1   0       0        0     0        1
+221     0            0       0    0   0       0        0     0        0
+222     1            2       0    1   0       0        1     1        1
+223     0            1       0    0   0       1        0     0        2
+224     1            1       3    1   0       1        0     1        6
+225     0            1       1    2   1       0        1     1        3
+226     1            1       0    1   1       0        0     1        1
+227     3            3       2    2   0       2        1     1        6
+228     0            3       0    2   2       0        1     1        2
+229     1            1       0    1   1       1        2     1        1
+230     0            0       0    0   0       0        0     1        0
+231     1            1       0    1   1       1        1     1        1
+232     0            1       1    0   0       0        0     0        1
+233     1            1       0    1   1       1        0     1        1
+234     0            0       0    1   0       0        0     0        1
+235     1            1       0    0   1       1        1     2        1
+236     0            0       0    0   0       1        0     0        1
+237     0            1       0    0   1       1        0     1        1
+238     1            2       1    2   0       3        1     1        3
+239     1            0       0    1   0       0        1     0        1
+240     0            2       0    0   0       0        0     0        1
+241     0            1       0    0   0       0        0     0        0
+242     0            3       0    0   3       0        1     2        1
+243     0            1       0    1   0       1        0     1        1
+244     0            2       0    0   1       0        2     1        0
+245     0            1       0    0   0       0        0     0        0
+246     0            0       0    0   0       0        0     0        0
+247     0            0       0    0   0       0        0     0        0
+248     0            0       0    0   0       0        0     0        1
+    positive
+1          0
+2          4
+3          1
+4          4
+5          0
+6          1
+7          1
+8          0
+9          0
+10         0
+11         6
+12         0
+13         0
+14         1
+15         0
+16         5
+17         0
+18         3
+19         2
+20         0
+21         2
+22         0
+23         0
+24         1
+25         3
+26         0
+27         2
+28         0
+29         1
+30         4
+31         0
+32         2
+33         0
+34         3
+35         2
+36         6
+37         1
+38         3
+39         0
+40         0
+41         4
+42         6
+43         0
+44         0
+45         0
+46         2
+47         0
+48         0
+49         3
+50         0
+51         0
+52         2
+53         1
+54         1
+55         0
+56         2
+57         4
+58         3
+59         2
+60         1
+61         1
+62         1
+63         0
+64         1
+65         0
+66         4
+67         4
+68         5
+69         0
+70         2
+71         2
+72         2
+73         7
+74         0
+75         2
+76         0
+77         2
+78         0
+79         2
+80         2
+81         2
+82         0
+83         6
+84         1
+85         0
+86         1
+87         1
+88         1
+89         0
+90         2
+91         2
+92         0
+93         1
+94         2
+95         4
+96         1
+97         5
+98         2
+99         0
+100        3
+101        0
+102        2
+103        2
+104        2
+105        3
+106        1
+107        5
+108        0
+109        3
+110        1
+111        8
+112        3
+113        2
+114        1
+115        0
+116        2
+117        1
+118        2
+119        2
+120        1
+121        2
+122        5
+123        1
+124        2
+125        0
+126        0
+127        2
+128        8
+129        0
+130        2
+131        0
+132        1
+133        2
+134        1
+135        0
+136        0
+137        0
+138        2
+139        0
+140        7
+141        3
+142        1
+143        4
+144        5
+145        3
+146        2
+147        2
+148        3
+149        0
+150        0
+151        2
+152        2
+153        1
+154        3
+155        6
+156        3
+157        1
+158        1
+159        0
+160        0
+161        2
+162        2
+163        1
+164        7
+165        0
+166        2
+167        0
+168        3
+169        2
+170        1
+171        1
+172        0
+173        5
+174        0
+175        0
+176        0
+177        0
+178        0
+179        2
+180        0
+181        1
+182        0
+183        0
+184        0
+185        0
+186        0
+187        0
+188        1
+189        0
+190        0
+191        0
+192        0
+193        0
+194        0
+195        2
+196        0
+197        3
+198        6
+199        1
+200        3
+201        1
+202        0
+203        0
+204        0
+205        0
+206        4
+207        0
+208        0
+209        0
+210        0
+211        3
+212        3
+213        0
+214        1
+215        0
+216        0
+217        0
+218        2
+219        1
+220        0
+221        0
+222        1
+223        0
+224        2
+225        1
+226        1
+227        2
+228        4
+229        2
+230        1
+231        1
+232        1
+233        1
+234        0
+235        1
+236        0
+237        1
+238        3
+239        1
+240        0
+241        0
+242        4
+243        0
+244        2
+245        0
+246        0
+247        0
+248        0</code></pre>
 </div>
 </div>
 </section>
@@ -441,7 +912,7 @@ Error'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/republicans/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/republicans/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;polite session&gt; https://www.reddit.com/r/republicans/
@@ -452,7 +923,7 @@ Error'</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/democrats/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/democrats/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;polite session&gt; https://www.reddit.com/r/democrats/
@@ -469,13 +940,13 @@ Error'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># url for the main subreddit</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/"</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>com_url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ychxe8/new_battleground_polls_a_boon_for_dems/"</span></span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To pull the comments for this specific post</span></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>css_selector  <span class="ot">&lt;-</span> <span class="st">"#t1_itmbw37 &gt; div.Comment.t1_itmbw37.P8SGAKMtRxNwlmLz1zdJu.HZ-cv9q391bm8s7qT54B3._1z5rdmX8TDr6mqwNv7A70U &gt; div._3tw__eCCe7j-epNCKGXUKk"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># url for the main subreddit</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>com_url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ychxe8/new_battleground_polls_a_boon_for_dems/"</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To pull the comments for this specific post</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>css_selector  <span class="ot">&lt;-</span> <span class="st">"#t1_itmbw37 &gt; div.Comment.t1_itmbw37.P8SGAKMtRxNwlmLz1zdJu.HZ-cv9q391bm8s7qT54B3._1z5rdmX8TDr6mqwNv7A70U &gt; div._3tw__eCCe7j-epNCKGXUKk"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>use get thread content</p>
@@ -484,14 +955,14 @@ Error'</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Here is where I run into an issue trying to get all the comments for one particular post</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>reddit_post <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ycha3g/supreme_court_puts_hold_on_order_that_graham/"</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">"#overlayScrollContainer &gt; div._1npCwF50X2J7Wt82SZi6J0 &gt; div.u35lf2ynn4jHsVUwPmNU.Dx3UxiK86VcfkFQVHNXNi &gt; div.uI_hDmU5GSiudtABRz_37 &gt; div._2M2wOqmeoPVvcSsJ6Po9-V._3287nL7j7epK9JmDC3N1VR"</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>blue_post <span class="ot">&lt;-</span> reddit_post <span class="sc">%&gt;%</span> </span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="at">css =</span> css) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Here is where I run into an issue trying to get all the comments for one particular post</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>reddit_post <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ycha3g/supreme_court_puts_hold_on_order_that_graham/"</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">"#overlayScrollContainer &gt; div._1npCwF50X2J7Wt82SZi6J0 &gt; div.u35lf2ynn4jHsVUwPmNU.Dx3UxiK86VcfkFQVHNXNi &gt; div.uI_hDmU5GSiudtABRz_37 &gt; div._2M2wOqmeoPVvcSsJ6Po9-V._3287nL7j7epK9JmDC3N1VR"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>blue_post <span class="ot">&lt;-</span> reddit_post <span class="sc">%&gt;%</span> </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="at">css =</span> css) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -662,199 +1133,202 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="DACSS/DACSS_[Course Number]_[Course Name_[term]" data-repo-id="" data-category="Announcements" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb53" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Text as Data Final Project"</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Quinn He"</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="an">desription:</span><span class="co"> "Research project"</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/19/2022"</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="co">  - Blog Post 2</span></span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span>
-<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(syuzhet)</span>
-<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
-<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
-<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(polite)</span>
-<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cleanNLP)</span>
-<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Research Question</span></span>
-<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>Compare how two subreddits (/r/republicans and /r/democrats) discuss particular political issues. With this it may be difficult because the democrat subreddit has a far superior user base.</span>
-<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>I think I will have to actually scrape reddit for the comments at least because I cannot find the command to get comments of posts. I am able to get the titles of posts and how many comments they have, but I want to analze the discourse of the comments as well.</span>
-<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>Should I do something with /r/conspiracy?</span>
-<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a>If I choose to look into rhetoric on the ukraine/russian war, I would have to pick different subreddits because there were little to no posts in subreddit titles.</span>
-<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>What words do they tend to use over the opposition?</span>
-<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a>Below I am pulling data from the two subreddits below. As of now, these two subreddits will be my focus for analysis.</span>
-<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-50"><a href="#cb53-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-51"><a href="#cb53-51" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"republicans"</span>, <span class="at">sort_by =</span> <span class="st">"top"</span>, <span class="at">period =</span> <span class="st">"month"</span>)</span>
-<span id="cb53-52"><a href="#cb53-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-53"><a href="#cb53-53" aria-hidden="true" tabindex="-1"></a>blue <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"democrats"</span>, <span class="at">sort_by =</span> <span class="st">"top"</span>, <span class="at">period =</span> <span class="st">"month"</span>)</span>
-<span id="cb53-54"><a href="#cb53-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-55"><a href="#cb53-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-56"><a href="#cb53-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-57"><a href="#cb53-57" aria-hidden="true" tabindex="-1"></a>Word cloud for /r/democrats titles</span>
-<span id="cb53-58"><a href="#cb53-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-61"><a href="#cb53-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-62"><a href="#cb53-62" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue<span class="sc">$</span>title)</span>
-<span id="cb53-63"><a href="#cb53-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-64"><a href="#cb53-64" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
-<span id="cb53-65"><a href="#cb53-65" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
-<span id="cb53-66"><a href="#cb53-66" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
-<span id="cb53-67"><a href="#cb53-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-68"><a href="#cb53-68" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens,</span>
-<span id="cb53-69"><a href="#cb53-69" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
-<span id="cb53-70"><a href="#cb53-70" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span>
-<span id="cb53-71"><a href="#cb53-71" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb53-72"><a href="#cb53-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-73"><a href="#cb53-73" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(blue_tokens)<span class="sc">%&gt;%</span> </span>
-<span id="cb53-74"><a href="#cb53-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span>
-<span id="cb53-75"><a href="#cb53-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-76"><a href="#cb53-76" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(blue_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span>
-<span id="cb53-77"><a href="#cb53-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-78"><a href="#cb53-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-79"><a href="#cb53-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-80"><a href="#cb53-80" aria-hidden="true" tabindex="-1"></a>Word cloud for /r/republicans titles</span>
-<span id="cb53-81"><a href="#cb53-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-84"><a href="#cb53-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-85"><a href="#cb53-85" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red<span class="sc">$</span>title)</span>
-<span id="cb53-86"><a href="#cb53-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-87"><a href="#cb53-87" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
-<span id="cb53-88"><a href="#cb53-88" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
-<span id="cb53-89"><a href="#cb53-89" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
-<span id="cb53-90"><a href="#cb53-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-91"><a href="#cb53-91" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens,</span>
-<span id="cb53-92"><a href="#cb53-92" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
-<span id="cb53-93"><a href="#cb53-93" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span>
-<span id="cb53-94"><a href="#cb53-94" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb53-95"><a href="#cb53-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-96"><a href="#cb53-96" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(red_tokens) <span class="sc">%&gt;%</span> </span>
-<span id="cb53-97"><a href="#cb53-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span>
-<span id="cb53-98"><a href="#cb53-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-99"><a href="#cb53-99" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(red_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb53-100"><a href="#cb53-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-101"><a href="#cb53-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-102"><a href="#cb53-102" aria-hidden="true" tabindex="-1"></a>This only gets the titles of the recent posts on the subreddit, but for now I will use it to just run sentiment analysis on that.</span>
-<span id="cb53-103"><a href="#cb53-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-106"><a href="#cb53-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-107"><a href="#cb53-107" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(red<span class="sc">$</span>title)</span>
-<span id="cb53-108"><a href="#cb53-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-109"><a href="#cb53-109" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(blue<span class="sc">$</span>title)</span>
-<span id="cb53-110"><a href="#cb53-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-111"><a href="#cb53-111" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(red_title_sent, red)</span>
-<span id="cb53-112"><a href="#cb53-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-113"><a href="#cb53-113" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(blue_title_sent, blue)</span>
-<span id="cb53-114"><a href="#cb53-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-115"><a href="#cb53-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-116"><a href="#cb53-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-117"><a href="#cb53-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting the comments from posts</span></span>
-<span id="cb53-118"><a href="#cb53-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-119"><a href="#cb53-119" aria-hidden="true" tabindex="-1"></a>Right now, I am only taking comments from posts I see on the front page with more than 10 comments, just to test this method. In the future I will have to determine a topic that I can track between both subreddits in order to get a sentiment that is comparable.</span>
-<span id="cb53-120"><a href="#cb53-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-123"><a href="#cb53-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-124"><a href="#cb53-124" aria-hidden="true" tabindex="-1"></a>blue_url <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"https://www.reddit.com/r/democrats/comments/ye13dt/the_midterms_are_a_referendum_on_democracy_in/"</span>,</span>
-<span id="cb53-125"><a href="#cb53-125" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ydqws7/vote_fetterman/"</span>,</span>
-<span id="cb53-126"><a href="#cb53-126" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ye1vqa/republicans_denounce_inflation_but_few_economists/"</span>)</span>
-<span id="cb53-127"><a href="#cb53-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-128"><a href="#cb53-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-129"><a href="#cb53-129" aria-hidden="true" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(blue_url)</span>
-<span id="cb53-130"><a href="#cb53-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-131"><a href="#cb53-131" aria-hidden="true" tabindex="-1"></a>three_comments <span class="ot">&lt;-</span> comments[[<span class="st">"comments"</span>]] <span class="co">#this is from the "comments" dataframe</span></span>
-<span id="cb53-132"><a href="#cb53-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-133"><a href="#cb53-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-134"><a href="#cb53-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-137"><a href="#cb53-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-138"><a href="#cb53-138" aria-hidden="true" tabindex="-1"></a>use get_thread_urls</span>
-<span id="cb53-139"><a href="#cb53-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-140"><a href="#cb53-140" aria-hidden="true" tabindex="-1"></a>then use <span class="fu">get_thread_content</span>()</span>
-<span id="cb53-141"><a href="#cb53-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-142"><a href="#cb53-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-143"><a href="#cb53-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-144"><a href="#cb53-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-147"><a href="#cb53-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-148"><a href="#cb53-148" aria-hidden="true" tabindex="-1"></a><span class="fu">get_nrc_sentiment</span>(three_comments<span class="sc">$</span>comment)</span>
-<span id="cb53-149"><a href="#cb53-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-150"><a href="#cb53-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-151"><a href="#cb53-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-152"><a href="#cb53-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## Webscrapping for Reddit Comments</span></span>
-<span id="cb53-153"><a href="#cb53-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-154"><a href="#cb53-154" aria-hidden="true" tabindex="-1"></a>First, I want to check if I can even scrape the website for comments</span>
-<span id="cb53-155"><a href="#cb53-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-158"><a href="#cb53-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-159"><a href="#cb53-159" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/republicans/"</span>)</span>
-<span id="cb53-160"><a href="#cb53-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-161"><a href="#cb53-161" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/democrats/"</span>)</span>
-<span id="cb53-162"><a href="#cb53-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-163"><a href="#cb53-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-164"><a href="#cb53-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-165"><a href="#cb53-165" aria-hidden="true" tabindex="-1"></a><span class="fu">## /r/democrats</span></span>
-<span id="cb53-166"><a href="#cb53-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-167"><a href="#cb53-167" aria-hidden="true" tabindex="-1"></a>I'm having trouble scraping for comments. When I try to pull all of the comments for one post, my output is NA and I cannot firgure out why. When I pull a single comment though, I get the output I desire no problem.</span>
-<span id="cb53-168"><a href="#cb53-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-171"><a href="#cb53-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-172"><a href="#cb53-172" aria-hidden="true" tabindex="-1"></a><span class="co"># url for the main subreddit</span></span>
-<span id="cb53-173"><a href="#cb53-173" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/"</span></span>
-<span id="cb53-174"><a href="#cb53-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-175"><a href="#cb53-175" aria-hidden="true" tabindex="-1"></a>com_url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ychxe8/new_battleground_polls_a_boon_for_dems/"</span></span>
-<span id="cb53-176"><a href="#cb53-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-177"><a href="#cb53-177" aria-hidden="true" tabindex="-1"></a><span class="co"># To pull the comments for this specific post</span></span>
-<span id="cb53-178"><a href="#cb53-178" aria-hidden="true" tabindex="-1"></a>css_selector  <span class="ot">&lt;-</span> <span class="st">"#t1_itmbw37 &gt; div.Comment.t1_itmbw37.P8SGAKMtRxNwlmLz1zdJu.HZ-cv9q391bm8s7qT54B3._1z5rdmX8TDr6mqwNv7A70U &gt; div._3tw__eCCe7j-epNCKGXUKk"</span></span>
-<span id="cb53-179"><a href="#cb53-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-180"><a href="#cb53-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-181"><a href="#cb53-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-182"><a href="#cb53-182" aria-hidden="true" tabindex="-1"></a>use get thread content</span>
-<span id="cb53-183"><a href="#cb53-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-184"><a href="#cb53-184" aria-hidden="true" tabindex="-1"></a>set a specific time frame to look at a particular issue. Setting a time frame would be better</span>
-<span id="cb53-185"><a href="#cb53-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-186"><a href="#cb53-186" aria-hidden="true" tabindex="-1"></a>Start doing more interesting stuff</span>
-<span id="cb53-187"><a href="#cb53-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-190"><a href="#cb53-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb53-191"><a href="#cb53-191" aria-hidden="true" tabindex="-1"></a><span class="co">#Here is where I run into an issue trying to get all the comments for one particular post</span></span>
-<span id="cb53-192"><a href="#cb53-192" aria-hidden="true" tabindex="-1"></a>reddit_post <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ycha3g/supreme_court_puts_hold_on_order_that_graham/"</span></span>
-<span id="cb53-193"><a href="#cb53-193" aria-hidden="true" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">"#overlayScrollContainer &gt; div._1npCwF50X2J7Wt82SZi6J0 &gt; div.u35lf2ynn4jHsVUwPmNU.Dx3UxiK86VcfkFQVHNXNi &gt; div.uI_hDmU5GSiudtABRz_37 &gt; div._2M2wOqmeoPVvcSsJ6Po9-V._3287nL7j7epK9JmDC3N1VR"</span></span>
-<span id="cb53-194"><a href="#cb53-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-195"><a href="#cb53-195" aria-hidden="true" tabindex="-1"></a>blue_post <span class="ot">&lt;-</span> reddit_post <span class="sc">%&gt;%</span> </span>
-<span id="cb53-196"><a href="#cb53-196" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb53-197"><a href="#cb53-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="at">css =</span> css) <span class="sc">%&gt;%</span> </span>
-<span id="cb53-198"><a href="#cb53-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
-<span id="cb53-199"><a href="#cb53-199" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb53-200"><a href="#cb53-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-201"><a href="#cb53-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb53-202"><a href="#cb53-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-203"><a href="#cb53-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes from other research</span></span>
-<span id="cb53-204"><a href="#cb53-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-205"><a href="#cb53-205" aria-hidden="true" tabindex="-1"></a>Reddit is not a great representation of the general public. It is a niche group, but can have more in depth discussion than Twitter. Reddit users are also, usually, passionate about certain ideas and subjects, therefore many users will talk freely about their ideas.</span>
-<span id="cb53-206"><a href="#cb53-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-207"><a href="#cb53-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## Previous Research</span></span>
-<span id="cb53-208"><a href="#cb53-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-209"><a href="#cb53-209" aria-hidden="true" tabindex="-1"></a>A Tale of Two Subreddits: https://ojs.aaai.org/index.php/ICWSM/article/view/19347/19119</span>
-<span id="cb53-210"><a href="#cb53-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-211"><a href="#cb53-211" aria-hidden="true" tabindex="-1"></a>No echo in the chambers of political interactions on Reddit: https://www.nature.com/articles/s41598-021-81531-x</span>
-<span id="cb53-212"><a href="#cb53-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-213"><a href="#cb53-213" aria-hidden="true" tabindex="-1"></a>Determining Presidential Approval Rating Using Reddit Sentiment Analysis: https://towardsdatascience.com/determining-presidential-approval-rating-using-reddit-sentiment-analysis-7912fdb5fcc7</span>
-<span id="cb53-214"><a href="#cb53-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-215"><a href="#cb53-215" aria-hidden="true" tabindex="-1"></a>https://www.researchgate.net/publication/349794705_Populist_Supporters_on_Reddit_A\_Comparison_of_Content_and_Behavioral_Patterns_Within_Publics_of_Supporters_of_Donald_Trump_and_Hillary_Clinton</span>
+<div class="sourceCode" id="cb35" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blog Post 2: Text"</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Quinn He"</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="an">desription:</span><span class="co"> "Research project"</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/19/2022"</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">  - Blog Post 2</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RedditExtractoR)</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(syuzhet)</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quanteda.textplots)</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(polite)</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cleanNLP)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Research Question</span></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>Compare how two subreddits (/r/republicans and /r/democrats) discuss particular political issues. With this it may be difficult because the democrat subreddit has a far superior user base.</span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>I think I will have to actually scrape reddit for the comments at least because I cannot find the command to get comments of posts. I am able to get the titles of posts and how many comments they have, but I want to analze the discourse of the comments as well.</span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>Should I do something with /r/conspiracy?</span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>If I choose to look into rhetoric on the ukraine/russian war, I would have to pick different subreddits because there were little to no posts in subreddit titles.</span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>What words do they tend to use over the opposition?</span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>Below I am pulling data from the two subreddits below. As of now, these two subreddits will be my focus for analysis.</span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a>red <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"republicans"</span>, <span class="at">sort_by =</span> <span class="st">"top"</span>, <span class="at">period =</span> <span class="st">"month"</span>)</span>
+<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>blue <span class="ot">&lt;-</span> <span class="fu">find_thread_urls</span>(<span class="at">subreddit =</span> <span class="st">"democrats"</span>, <span class="at">sort_by =</span> <span class="st">"top"</span>, <span class="at">period =</span> <span class="st">"month"</span>)</span>
+<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>blue_comments <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"blue_comments.csv"</span>)</span>
+<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>red_comments <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"red_comments.csv"</span>)</span>
+<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a>Word cloud for /r/democrats titles</span>
+<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-64"><a href="#cb35-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-65"><a href="#cb35-65" aria-hidden="true" tabindex="-1"></a>blue_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(blue_comments<span class="sc">$</span>comment)</span>
+<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(blue_corpus,</span>
+<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a>blue_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(blue_tokens,</span>
+<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
+<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span>
+<span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb35-75"><a href="#cb35-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a>blue_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(blue_tokens)<span class="sc">%&gt;%</span> </span>
+<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span>
+<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(blue_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span>
+<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a>Word cloud for /r/republicans titles</span>
+<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a>red_corpus <span class="ot">&lt;-</span> <span class="fu">corpus</span>(red_comments<span class="sc">$</span>comment)</span>
+<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens</span>(red_corpus,</span>
+<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_punct =</span> T,</span>
+<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a>                      <span class="at">remove_numbers =</span> T)</span>
+<span id="cb35-93"><a href="#cb35-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a>red_tokens <span class="ot">&lt;-</span> <span class="fu">tokens_select</span>(red_tokens,</span>
+<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a>                             <span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>),</span>
+<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a>                             <span class="at">selection =</span> <span class="st">"remove"</span>)</span>
+<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>red_dfm <span class="ot">&lt;-</span> <span class="fu">dfm</span>(red_tokens) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfm_trim</span>(<span class="at">min_termfreq =</span> <span class="dv">3</span>)</span>
+<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a><span class="fu">textplot_wordcloud</span>(red_dfm, <span class="at">max_words =</span> <span class="dv">100</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-104"><a href="#cb35-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-105"><a href="#cb35-105" aria-hidden="true" tabindex="-1"></a>This only gets the titles of the recent posts on the subreddit, but for now I will use it to just run sentiment analysis on that.</span>
+<span id="cb35-106"><a href="#cb35-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-109"><a href="#cb35-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-110"><a href="#cb35-110" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(red<span class="sc">$</span>title)</span>
+<span id="cb35-111"><a href="#cb35-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-112"><a href="#cb35-112" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">get_nrc_sentiment</span>(blue<span class="sc">$</span>title)</span>
+<span id="cb35-113"><a href="#cb35-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-114"><a href="#cb35-114" aria-hidden="true" tabindex="-1"></a>red_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(red_title_sent, red)</span>
+<span id="cb35-115"><a href="#cb35-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-116"><a href="#cb35-116" aria-hidden="true" tabindex="-1"></a>blue_title_sent <span class="ot">&lt;-</span> <span class="fu">cbind</span>(blue_title_sent, blue)</span>
+<span id="cb35-117"><a href="#cb35-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-118"><a href="#cb35-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-119"><a href="#cb35-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-120"><a href="#cb35-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting the comments from posts</span></span>
+<span id="cb35-121"><a href="#cb35-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-122"><a href="#cb35-122" aria-hidden="true" tabindex="-1"></a>Right now, I am only taking comments from posts I see on the front page with more than 10 comments, just to test this method. In the future I will have to determine a topic that I can track between both subreddits in order to get a sentiment that is comparable.</span>
+<span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-126"><a href="#cb35-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-127"><a href="#cb35-127" aria-hidden="true" tabindex="-1"></a>blue_url <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"https://www.reddit.com/r/democrats/comments/ye13dt/the_midterms_are_a_referendum_on_democracy_in/"</span>,</span>
+<span id="cb35-128"><a href="#cb35-128" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ydqws7/vote_fetterman/"</span>,</span>
+<span id="cb35-129"><a href="#cb35-129" aria-hidden="true" tabindex="-1"></a>              <span class="st">"https://www.reddit.com/r/democrats/comments/ye1vqa/republicans_denounce_inflation_but_few_economists/"</span>)</span>
+<span id="cb35-130"><a href="#cb35-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-131"><a href="#cb35-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-132"><a href="#cb35-132" aria-hidden="true" tabindex="-1"></a>comments <span class="ot">&lt;-</span> <span class="fu">get_thread_content</span>(blue_url)</span>
+<span id="cb35-133"><a href="#cb35-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-134"><a href="#cb35-134" aria-hidden="true" tabindex="-1"></a>three_comments <span class="ot">&lt;-</span> comments[[<span class="st">"comments"</span>]] <span class="co">#this is from the "comments" dataframe</span></span>
+<span id="cb35-135"><a href="#cb35-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-136"><a href="#cb35-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-137"><a href="#cb35-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-140"><a href="#cb35-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-141"><a href="#cb35-141" aria-hidden="true" tabindex="-1"></a>use get_thread_urls</span>
+<span id="cb35-142"><a href="#cb35-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-143"><a href="#cb35-143" aria-hidden="true" tabindex="-1"></a>then use <span class="fu">get_thread_content</span>()</span>
+<span id="cb35-144"><a href="#cb35-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-145"><a href="#cb35-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-146"><a href="#cb35-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-147"><a href="#cb35-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-150"><a href="#cb35-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-151"><a href="#cb35-151" aria-hidden="true" tabindex="-1"></a><span class="fu">get_nrc_sentiment</span>(three_comments<span class="sc">$</span>comment)</span>
+<span id="cb35-152"><a href="#cb35-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-153"><a href="#cb35-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-154"><a href="#cb35-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-155"><a href="#cb35-155" aria-hidden="true" tabindex="-1"></a><span class="fu">## Webscrapping for Reddit Comments</span></span>
+<span id="cb35-156"><a href="#cb35-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-157"><a href="#cb35-157" aria-hidden="true" tabindex="-1"></a>First, I want to check if I can even scrape the website for comments</span>
+<span id="cb35-158"><a href="#cb35-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-161"><a href="#cb35-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-162"><a href="#cb35-162" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/republicans/"</span>)</span>
+<span id="cb35-163"><a href="#cb35-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-164"><a href="#cb35-164" aria-hidden="true" tabindex="-1"></a><span class="fu">bow</span>(<span class="st">"https://www.reddit.com/r/democrats/"</span>)</span>
+<span id="cb35-165"><a href="#cb35-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-166"><a href="#cb35-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-167"><a href="#cb35-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-168"><a href="#cb35-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## /r/democrats</span></span>
+<span id="cb35-169"><a href="#cb35-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-170"><a href="#cb35-170" aria-hidden="true" tabindex="-1"></a>I'm having trouble scraping for comments. When I try to pull all of the comments for one post, my output is NA and I cannot firgure out why. When I pull a single comment though, I get the output I desire no problem.</span>
+<span id="cb35-171"><a href="#cb35-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-174"><a href="#cb35-174" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-175"><a href="#cb35-175" aria-hidden="true" tabindex="-1"></a><span class="co"># url for the main subreddit</span></span>
+<span id="cb35-176"><a href="#cb35-176" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/"</span></span>
+<span id="cb35-177"><a href="#cb35-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-178"><a href="#cb35-178" aria-hidden="true" tabindex="-1"></a>com_url <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ychxe8/new_battleground_polls_a_boon_for_dems/"</span></span>
+<span id="cb35-179"><a href="#cb35-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-180"><a href="#cb35-180" aria-hidden="true" tabindex="-1"></a><span class="co"># To pull the comments for this specific post</span></span>
+<span id="cb35-181"><a href="#cb35-181" aria-hidden="true" tabindex="-1"></a>css_selector  <span class="ot">&lt;-</span> <span class="st">"#t1_itmbw37 &gt; div.Comment.t1_itmbw37.P8SGAKMtRxNwlmLz1zdJu.HZ-cv9q391bm8s7qT54B3._1z5rdmX8TDr6mqwNv7A70U &gt; div._3tw__eCCe7j-epNCKGXUKk"</span></span>
+<span id="cb35-182"><a href="#cb35-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-183"><a href="#cb35-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-184"><a href="#cb35-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-185"><a href="#cb35-185" aria-hidden="true" tabindex="-1"></a>use get thread content</span>
+<span id="cb35-186"><a href="#cb35-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-187"><a href="#cb35-187" aria-hidden="true" tabindex="-1"></a>set a specific time frame to look at a particular issue. Setting a time frame would be better</span>
+<span id="cb35-188"><a href="#cb35-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-189"><a href="#cb35-189" aria-hidden="true" tabindex="-1"></a>Start doing more interesting stuff</span>
+<span id="cb35-190"><a href="#cb35-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-193"><a href="#cb35-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb35-194"><a href="#cb35-194" aria-hidden="true" tabindex="-1"></a><span class="co">#Here is where I run into an issue trying to get all the comments for one particular post</span></span>
+<span id="cb35-195"><a href="#cb35-195" aria-hidden="true" tabindex="-1"></a>reddit_post <span class="ot">&lt;-</span> <span class="st">"https://www.reddit.com/r/democrats/comments/ycha3g/supreme_court_puts_hold_on_order_that_graham/"</span></span>
+<span id="cb35-196"><a href="#cb35-196" aria-hidden="true" tabindex="-1"></a>css <span class="ot">&lt;-</span> <span class="st">"#overlayScrollContainer &gt; div._1npCwF50X2J7Wt82SZi6J0 &gt; div.u35lf2ynn4jHsVUwPmNU.Dx3UxiK86VcfkFQVHNXNi &gt; div.uI_hDmU5GSiudtABRz_37 &gt; div._2M2wOqmeoPVvcSsJ6Po9-V._3287nL7j7epK9JmDC3N1VR"</span></span>
+<span id="cb35-197"><a href="#cb35-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-198"><a href="#cb35-198" aria-hidden="true" tabindex="-1"></a>blue_post <span class="ot">&lt;-</span> reddit_post <span class="sc">%&gt;%</span> </span>
+<span id="cb35-199"><a href="#cb35-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb35-200"><a href="#cb35-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_node</span>(<span class="at">css =</span> css) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-201"><a href="#cb35-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
+<span id="cb35-202"><a href="#cb35-202" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-203"><a href="#cb35-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-204"><a href="#cb35-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb35-205"><a href="#cb35-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-206"><a href="#cb35-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Notes from other research</span></span>
+<span id="cb35-207"><a href="#cb35-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-208"><a href="#cb35-208" aria-hidden="true" tabindex="-1"></a>Reddit is not a great representation of the general public. It is a niche group, but can have more in depth discussion than Twitter. Reddit users are also, usually, passionate about certain ideas and subjects, therefore many users will talk freely about their ideas.</span>
+<span id="cb35-209"><a href="#cb35-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-210"><a href="#cb35-210" aria-hidden="true" tabindex="-1"></a><span class="fu">## Previous Research</span></span>
+<span id="cb35-211"><a href="#cb35-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-212"><a href="#cb35-212" aria-hidden="true" tabindex="-1"></a>A Tale of Two Subreddits: https://ojs.aaai.org/index.php/ICWSM/article/view/19347/19119</span>
+<span id="cb35-213"><a href="#cb35-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-214"><a href="#cb35-214" aria-hidden="true" tabindex="-1"></a>No echo in the chambers of political interactions on Reddit: https://www.nature.com/articles/s41598-021-81531-x</span>
+<span id="cb35-215"><a href="#cb35-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-216"><a href="#cb35-216" aria-hidden="true" tabindex="-1"></a>Determining Presidential Approval Rating Using Reddit Sentiment Analysis: https://towardsdatascience.com/determining-presidential-approval-rating-using-reddit-sentiment-analysis-7912fdb5fcc7</span>
+<span id="cb35-217"><a href="#cb35-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-218"><a href="#cb35-218" aria-hidden="true" tabindex="-1"></a>https://www.researchgate.net/publication/349794705_Populist_Supporters_on_Reddit_A\_Comparison_of_Content_and_Behavioral_Patterns_Within_Publics_of_Supporters_of_Donald_Trump_and_Hillary_Clinton</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
